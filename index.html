@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Continuum haltérophilie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141019;--bg2:#1b1522;--card:#211a2b;--card2:#2a2136;
+  --ink:#ece4f6;--muted:#a597bb;--faint:#6f6283;--line:#3a2f4a;
+  --lav:#c9b2ec;--lav-deep:#9f86cf;--rose:#e6a9c9;--mint:#a8d8c4;--mint-bg:#1f2e2a;
+  --sky:#a9c4ec;--field:#181220;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;color:var(--ink);
+  background:radial-gradient(1200px 500px at 50% -200px,#2d2140 0%,transparent 70%),var(--bg);
+  font:16px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{max-width:640px;margin:0 auto;padding:28px 16px 64px}
+h1{font-family:Cinzel,serif;font-weight:700;font-size:1.65rem;letter-spacing:.06em;margin:0;text-align:center;color:var(--lav)}
+.sub{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.08rem;color:var(--muted);text-align:center;margin:4px 0 6px}
+.sync{text-align:center;font-size:.76rem;color:var(--faint);margin:-14px 0 16px}
+.sync.ok{color:var(--mint)}
+.orn{text-align:center;color:var(--faint);letter-spacing:.6em;font-size:.8rem;margin:6px 0 22px}
+h2{font-family:Cinzel,serif;font-weight:500;font-size:1rem;letter-spacing:.08em;color:var(--lav);
+  margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+h2::before,h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+details.panel>summary{font-family:Cinzel,serif;font-weight:500;letter-spacing:.05em;color:var(--lav);cursor:pointer}
+.maxes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.maxes label{font-size:.8rem;color:var(--muted);display:block}
+.maxes input,.maxes select{width:100%;margin-top:4px;padding:9px 10px;border:1px solid var(--line);
+  border-radius:10px;background:var(--field);color:var(--ink);font:600 1rem Inter,sans-serif}
+.tip{color:var(--muted);font-size:.84rem;margin-top:8px}
+
+.cont{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.cont button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:12px;padding:9px 6px;cursor:pointer;text-align:left;font:inherit;min-width:0}
+.cont button b{display:block;font-family:Cinzel,serif;font-size:.78rem;color:var(--lav-deep);letter-spacing:.06em}
+.cont button span{display:block;font-size:.74rem;font-weight:600;line-height:1.2;color:var(--muted)}
+.cont button.on{background:linear-gradient(160deg,#3b2c52,#2c2140);border-color:var(--lav-deep)}
+.cont button.on b{color:var(--lav)}
+.cont button.on span{color:var(--ink)}
+.weeks{display:flex;gap:6px;margin-bottom:10px}
+.weeks button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:9px 0;border-radius:10px;font:600 .9rem Inter,sans-serif;cursor:pointer}
+.weeks button.on{background:var(--lav);border-color:var(--lav);color:#1d1528}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px}
+.days button.m small{color:var(--mint)}
+.note.m{border-left-color:var(--mint)}
+.ex .tag.mob{color:var(--mint)}
+.days button{border:none;background:transparent;color:var(--faint);padding:8px 0 7px;
+  font:600 .86rem Inter,sans-serif;border-bottom:2px solid var(--line);cursor:pointer;line-height:1.2}
+.days button small{display:block;font-size:.62rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+.days button.h small{color:var(--lav-deep)}
+.days button.c small{color:var(--sky)}
+.days button.on{color:var(--ink);border-color:var(--rose)}
+
+.note{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--rose);
+  border-radius:12px;padding:12px 14px;font-size:.88rem;color:var(--muted);margin-bottom:6px}
+.note.c{border-left-color:var(--sky)}
+.note b{display:block;color:var(--ink);font-family:Cinzel,serif;font-weight:500;letter-spacing:.04em;font-size:.95rem;margin-bottom:4px}
+.note i{color:var(--rose);font-style:normal}
+.mv{background:var(--bg2);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;margin:8px 0 0;font-size:.86rem;color:var(--muted)}
+.mv label{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mv select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);font:600 .86rem Inter,sans-serif}
+.mv p{margin:8px 0 0;line-height:1.45}
+.mv-msg{color:var(--ink)}
+.mv-in{border-style:solid;border-color:var(--rose)}
+.mv-bon{display:flex!important;flex-wrap:nowrap!important;align-items:flex-start!important;gap:10px;margin-top:10px;color:var(--ink);cursor:pointer}
+.mv-bon input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;margin-top:1px;border:1.5px solid var(--faint);border-radius:6px;position:relative;cursor:pointer}
+.mv-bon input:checked{background:var(--rose);border-color:var(--rose)}
+.mv-bon input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #1d1528;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.mv-hint{font-size:.8rem;color:var(--muted)!important;margin-top:6px!important}
+.mv-in p{margin:0 0 6px;color:var(--ink)}
+.days button.moved::after{content:"↻";display:block;font-size:.7rem;color:var(--rose);line-height:1}
+
+/* échauffement repliable */
+details.wu{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:22px}
+details.wu>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px}
+details.wu>summary::-webkit-details-marker{display:none}
+details.wu>summary .ttl{font-family:Cinzel,serif;font-weight:500;letter-spacing:.08em;color:var(--lav);flex:1}
+details.wu>summary .cnt{font-size:.8rem;color:var(--muted);font-weight:600}
+details.wu>summary .chev{color:var(--lav-deep);transition:transform .2s}
+details.wu[open]>summary .chev{transform:rotate(180deg)}
+.wu-body{padding:0 16px 10px}
+.wu-g{padding:10px 0;border-top:1px dashed var(--line)}
+.wu-g h4{margin:0 0 6px;font-family:Cinzel,serif;font-weight:500;font-size:.82rem;letter-spacing:.08em;color:var(--lav-deep)}
+.wu-i{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.wu-i input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;margin-top:2px;border:1.5px solid var(--faint);
+  border-radius:6px;background:transparent;cursor:pointer;position:relative}
+.wu-i input:checked{background:var(--mint);border-color:var(--mint)}
+.wu-i input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+  border:solid #17201d;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.wu-t{font-size:.92rem;line-height:1.35}
+.wu-t b{font-weight:600}
+.wu-t .dose{color:var(--rose);font-weight:600;white-space:nowrap}
+.wu-t small{display:block;color:var(--muted);font-size:.8rem;margin-top:1px}
+.wu-i.ok .wu-t{opacity:.55}
+
+.sec{font-family:Cinzel,serif;font-weight:500;font-size:.82rem;letter-spacing:.1em;color:var(--faint);
+  margin:20px 2px 8px;text-transform:uppercase}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.ex.complete{border-color:var(--mint);background:linear-gradient(180deg,var(--card),#1e2626)}
+.ex .tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.ex .tag.main{color:var(--rose)}
+.ex .tag.renfo{color:var(--lav-deep)}
+.ex .tag.esc{color:var(--sky)}
+.ex h3{margin:0;font-size:1.04rem;font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}
+.scheme{color:var(--muted);font-size:.95rem;font-weight:500}
+.loadbox{display:flex;align-items:center;gap:6px;flex:none}
+.loadbox input{width:78px;padding:7px 9px;border:1.5px solid var(--line);border-radius:10px;
+  background:var(--field);color:var(--lav);font:700 1.15rem Inter,sans-serif;text-align:right}
+.loadbox input.edited{border-color:var(--rose);color:var(--rose)}
+.loadbox .u{font-weight:600;color:var(--muted);font-size:.85rem}
+.loadbox .rst{border:none;background:none;color:var(--rose);font-size:1.15rem;cursor:pointer;padding:2px}
+.pct{font-size:.78rem;color:var(--faint);text-align:right;margin-top:3px}
+.fixed{font-weight:600;color:var(--lav);font-size:.95rem;text-align:right}
+.how{margin-top:8px}
+.how summary{font-size:.85rem;color:var(--lav-deep);cursor:pointer;font-weight:600}
+.how p{margin:8px 0 4px;font-size:.9rem}
+.how ul{margin:4px 0 0;padding-left:18px;font-size:.86rem;color:var(--muted)}
+.sets{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.sets button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--field);color:var(--faint);font:600 .88rem Inter,sans-serif;cursor:pointer}
+.sets button.ok{background:var(--mint-bg);border-color:var(--mint);color:var(--mint)}
+.sets button.hard{width:auto;height:38px;border-radius:19px;padding:0 12px;margin-left:auto;font-size:.78rem;color:var(--faint);border-style:dashed}
+.sets button.hard.on{color:var(--rose);border-color:var(--rose);border-style:solid;background:transparent}
+.actions{margin-top:6px}
+.linkbtn{background:none;border:none;color:var(--faint);font:inherit;font-size:.84rem;text-decoration:underline;cursor:pointer;padding:0;margin-right:16px}
+
+.method{padding-left:18px;margin:4px 0 0}
+.method li{margin-bottom:8px;font-size:.9rem;color:var(--muted)}
+.method li b{color:var(--ink)}
+table.t{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:10px}
+table.t th,table.t td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.t th{color:var(--lav-deep);font-weight:600}
+table.t td{color:var(--muted)}
+table.t td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+.io-btns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.io{flex:1;min-width:140px;border:1px solid var(--lav-deep);background:var(--card2);color:var(--lav);border-radius:10px;padding:10px;font:600 .9rem Inter,sans-serif;cursor:pointer}
+.io-text{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);font:12px/1.4 ui-monospace,Menlo,monospace;padding:8px;resize:vertical}
+/* onglets */
+.tabs{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:16px}
+.tabs button{flex:1;border:none;background:transparent;color:var(--muted);padding:10px 0;border-radius:10px;
+  font:600 .92rem Inter,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--card2);color:var(--lav);box-shadow:inset 0 0 0 1px var(--line)}
+/* suivi */
+.pick{display:block;font-size:.8rem;color:var(--muted)}
+.pick select{width:100%;margin-top:4px;padding:10px;border:1px solid var(--line);border-radius:10px;
+  background:var(--field);color:var(--ink);font:600 1rem Inter,sans-serif}
+.chart-ttl{margin:14px 0 2px;font-weight:600}
+.legend{display:flex;gap:16px;font-size:.82rem;color:var(--muted);margin:6px 0 4px}
+.legend span{display:flex;align-items:center;gap:6px}
+.goal-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.goal-head .big{font-family:Cinzel,serif;font-size:1.6rem;color:var(--lav);font-weight:700}
+.goal-head .big small{font-size:.9rem;color:var(--muted);font-weight:500;font-family:Inter,sans-serif}
+.goal-head .sub2{font-size:.84rem;color:var(--muted)}
+.gbar{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:8px}
+.gbar i{display:block;height:100%;background:#9a7ad8;border-radius:4px}
+table.goals td input{width:58px;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:600 .85rem Inter,sans-serif;text-align:right}
+table.goals td.gap{color:var(--rose);font-weight:600}
+table.goals td.ok{color:var(--mint);font-weight:600}
+table.goals tr.tot td{color:var(--ink);font-weight:700}
+table.goals .mini{display:block;height:4px;background:var(--line);border-radius:3px;margin-top:4px;overflow:hidden}
+table.goals .mini i{display:block;height:100%;background:#9a7ad8}
+.sw{display:inline-block;width:18px;height:0;border-top:2px solid}
+.sw-plan{border-top:2px dashed #8a7d9e}
+.sw-done,.sw-sn{border-color:#9a7ad8;border-top-width:3px}
+.sw-cj{border-color:#33a883;border-top-width:3px}
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .axis{fill:var(--faint);font:500 10px Inter,sans-serif}
+.chart .blk{fill:var(--muted);font:600 11px Inter,sans-serif}
+.chart .lbl{fill:var(--ink);font:600 11px Inter,sans-serif}
+.chart .hit{fill:transparent;cursor:crosshair}
+.chart .xh{stroke:var(--muted);stroke-width:1;opacity:0}
+.tipbox{position:fixed;pointer-events:none;background:#0f0b14;border:1px solid var(--line);border-radius:10px;
+  padding:8px 10px;font-size:.8rem;color:var(--ink);opacity:0;transition:opacity .1s;z-index:10;max-width:220px}
+.tipbox b{display:block;font-family:Cinzel,serif;font-weight:500;color:var(--lav);margin-bottom:2px}
+.tipbox i{display:inline-block;width:10px;height:3px;margin-right:6px;vertical-align:middle;font-style:normal}
+table.d{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+table.d th,table.d td{padding:5px 4px;border-bottom:1px solid var(--line);text-align:right;color:var(--muted)}
+table.d th:first-child,table.d td:first-child{text-align:left;color:var(--ink)}
+table.d th{color:var(--lav-deep);font-weight:600}
+@media (max-width:420px){
+  .cont button span{font-size:.68rem}
+  .maxes{grid-template-columns:1fr}
+  .days button{font-size:.8rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Continuum haltérophilie</h1>
+  <p class="sub">haltérophilie · escalade · renforcement</p>
+  <div class="orn">✦ ✦ ✦</div>
+  <p class="sync" id="syncStatus">Sauvegarde : ce navigateur</p>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-t="prog">Programme</button>
+    <button role="tab" data-t="suivi">Suivi des charges</button>
+  </div>
+
+  <div id="tabProg">
+  <details class="panel">
+    <summary>Mes maxes et réglages</summary>
+    <div class="maxes">
+      <label>Arraché (kg)<input type="number" step="0.5" id="m_sn"></label>
+      <label>Épaulé-jeté (kg)<input type="number" step="0.5" id="m_cj"></label>
+      <label>Back squat (kg)<input type="number" step="0.5" id="m_bs"></label>
+      <label>Front squat (kg)<input type="number" step="0.5" id="m_fs"></label>
+      <label>Arrondi des charges
+        <select id="m_round"><option value="0.5">0,5 kg</option><option value="1">1 kg</option><option value="2.5">2,5 kg</option></select>
+      </label>
+      <label>Barre utilisée (kg)<input type="number" step="1" id="m_bar"></label>
+    </div>
+    <p class="tip">Les charges d'haltéro se recalculent seules à partir des maxes. Toute charge peut être modifiée à la main ; ↺ revient à la valeur proposée.</p>
+  </details>
+
+  <div class="cont" id="blocks"></div>
+  <div class="weeks" id="weeks"></div>
+  <div class="days" id="days"></div>
+  <div id="intro"></div>
+
+  <details class="wu" id="wuBox">
+    <summary><span class="ttl">Échauffement</span><span class="cnt" id="wuCount"></span><span class="chev">▾</span></summary>
+    <div class="wu-body" id="warmup"></div>
+  </details>
+
+  <div id="list"></div>
+  <div class="actions">
+    <button class="linkbtn" id="resetSets">Tout décocher</button>
+    <button class="linkbtn" id="resetLoads">Remettre les charges proposées</button>
+  </div>
+
+  <h2>La semaine</h2>
+  <div class="panel">
+    <table class="t">
+      <tr><th>Jour</th><th>Séance</th><th>Pourquoi ici</th></tr>
+      <tr><td>Lundi</td><td>Repos + routine hanches</td><td>15 min de mobilité au calme : pas de fatigue, et les hanches gagnent de l'amplitude.</td></tr>
+      <tr><td>Mardi</td><td>Escalade · force</td><td>Doigts frais après le repos : c'est le jour pour la grimpe à la limite.</td></tr>
+      <tr><td>Mercredi</td><td>Haltéro · épaulé-jeté</td><td>Jambes fraîches, peu de tirage de doigts.</td></tr>
+      <tr><td>Jeudi</td><td>Escalade · technique</td><td>Intensité modérée pour arriver correcte à l'arraché.</td></tr>
+      <tr><td>Vendredi</td><td>Haltéro · arraché</td><td>Séance technique, pas de charges maximales.</td></tr>
+      <tr><td>Samedi</td><td>Haltéro · les deux</td><td>La séance la plus chargée, suivie d'une grimpe facile.</td></tr>
+      <tr><td>Dimanche</td><td>Escalade · endurance</td><td>Volume à faible intensité : aide à récupérer et construit la caisse.</td></tr>
+    </table>
+  </div>
+
+  <h2>Le continuum</h2>
+  <div class="panel">
+    <ul class="method">
+      <li><b>Bloc 1 · Positions et vitesse</b> : départs suspendus avec réception complète en squat, beaucoup de répétitions entre 55 et 70 %. Les versions power ne servent plus qu'en cas de gêne aux genoux.</li>
+      <li><b>Bloc 2 · Du hang au sol</b> : réception complète depuis le hang, arrivée du jerk fendu.</li>
+      <li><b>Bloc 3 · Mouvements complets</b> : arraché et épaulé-jeté depuis le sol, en doubles, jusqu'à 80 %.</li>
+      <li><b>Bloc 4 · Consolidation et test</b> : doubles plus lourds, test des maxes le samedi de la S4. On recalcule et on repart.</li>
+    </ul>
+  </div>
+
+  <h2>Méthodes</h2>
+  <div class="panel">
+    <ul class="method">
+      <li><b>Les deux mouvements à chaque séance d'haltéro</b> : chaque mouvement revient 3 fois par semaine. La pratique distribuée ancre mieux le geste.</li>
+      <li><b>Périodisation par blocs</b> : charge croissante S1 → S3, allègement ou test en S4. La S4 allège aussi l'escalade.</li>
+      <li><b>Complexes ciblés</b> : quelques mouvements principaux sont remplacés par des complexes (plusieurs mouvements enchaînés sans lâcher la barre). Bloc 1 : hang snatch + overhead squats et tirage + hang clean + front squat, pour la position basse et la mobilité sous charge. Bloc 2 : hang + mouvement complet, pour transférer la position haute vers le sol. Bloc 3 : arraché avec pause au genou + arraché, pour la chaîne postérieure au premier tirage. Le bloc 4 reste sur les mouvements de compétition. Charge d'un complexe = celle que tu tiens sur le mouvement le plus difficile.</li>
+      <li><b>Apprentissage « top-down »</b> : des positions hautes vers le sol. Réception complète en squat dès que possible : c'est la position de compétition, et elle travaille la mobilité de hanche et de cheville sous charge.</li>
+      <li><b>Renforcement complémentaire de l'escalade</b> : poussées, coiffe des rotateurs, extenseurs du poignet, jambes unilatérales. Pas de tirage vertical ni de rowing lourd : l'escalade s'en charge déjà.</li>
+      <li><b>Mobilité hanches et chevilles intégrée</b> : 3 exercices de mobilité active ou lestée par séance d'haltéro, faits pendant les temps de repos. Hanches (rotation, adducteurs, fléchisseurs) et dorsiflexion de cheville, pour une réception plus basse et un buste plus droit.</li>
+      <li><b>Priorité chaîne postérieure et hanches</b> : activation des fessiers et mobilité de hanche à chaque échauffement, 2 exercices de chaîne postérieure par séance de renfo (nordic, extension à 45°, RDL, hip thrust, RDL unilatéral) et une routine hanches le lundi.</li>
+      <li><b>Gestion de l'interférence</b> : sangles sur les tirages et le RDL pour épargner les doigts, intensité maximale en escalade un seul jour par semaine, après le repos.</li>
+      <li><b>Progression automatique</b> : chaque charge proposée tient compte de tes séances réelles. Haltéro : la page compare ce que tu as fait au prévu sur tes 3 dernières séances du même exercice (ou, pour un nouvel exercice, des mouvements principaux de la même famille) et ajuste la suite (de −15 % à +5 %). Toutes les séries validées font monter, une séance incomplète fait redescendre, et « C'était dur » bloque la hausse. Renfo et mobilité : dernière charge + l'incrément si toutes les séries sont validées sans « C'était dur », même charge sinon. Pour que ça marche, mets ta vraie charge dans la case avant de cocher.</li>
+      <li><b>Autorégulation</b> : barre lente ou technique qui se dégrade = on garde ou on baisse la charge. Même règle en escalade si les doigts tirent.</li>
+    </ul>
+    <table class="t">
+      <tr><th>Intensité</th><th>Reps / série</th><th>Total optimal</th><th>Fourchette</th></tr>
+      <tr><td>55–65 %</td><td>3–6</td><td>24</td><td>18–30</td></tr>
+      <tr><td>70–80 %</td><td>3–6</td><td>18</td><td>12–24</td></tr>
+      <tr><td>80–90 %</td><td>2–4</td><td>15</td><td>10–20</td></tr>
+      <tr><td>90 % +</td><td>1–2</td><td>7</td><td>4–10</td></tr>
+    </table>
+  </div>
+
+  <h2>Règles</h2>
+  <div class="panel">
+    <ul class="method">
+      <li><b>Hanches</b> : mobilité sans douleur, jamais en forçant. Si une position reste bloquée malgré la routine, en reparler avec ton ostéo.</li>
+      <li><b>Genoux</b> : gêne → versions power et squat stop 90°. Douleur → seulement tirages, push press et renfo du haut.</li>
+      <li><b>Doigts</b> : douleur à une poulie ou à la base d'un doigt → pas de suspension ni de réglettes, grimpe sur grosses prises seulement, et on en parle à un kiné.</li>
+      <li><b>Épaules</b> : fatiguées le vendredi → retirer le snatch balance ou l'overhead squat.</li>
+      <li><b>Séance manquée</b> : la reporter au lendemain ou au surlendemain, aux mêmes charges. Si le lendemain du report est un jour sans charge, tu peux l'allonger (case « Allonger la séance ») : un peu plus de volume, jamais plus lourd. Si elle tombe sur un jour de grimpe d'endurance, c'est la grimpe qui saute. Plus de 2 jours de retard : on la laisse tomber et on reprend le programme normalement. Indique le report avec « Séance faite » sous l'intro de la séance.</li>
+      <li><b>Fatigue générale</b> : si tout est lourd deux séances de suite, la séance d'escalade du jeudi devient une séance facile.</li>
+      <li><b>Repos</b> : 2 min sur les séries techniques, 2 min 30–3 min sur les plus lourdes, 60–90 s en renfo.</li>
+      <li><b>Vidéo</b> : filme une série par mouvement principal, de profil.</li>
+    </ul>
+  </div>
+  </div><!-- /tabProg -->
+
+  <div id="tabSuivi" hidden>
+    <h2 style="margin-top:4px">Objectifs · −69 kg honneur</h2>
+    <div class="panel">
+      <div class="goal-head" id="goalHead"></div>
+      <table class="d goals" id="goalTbl"></table>
+      <p class="tip" id="ratioNote"></p>
+      <p class="tip">Les valeurs « Actuel » et « Objectif » se modifient en touchant le chiffre. Arraché, épaulé-jeté et squats sont reliés à « Mes maxes » : les changer ici met aussi les charges du programme à jour. Objectifs repris du post du Club Haltérophile Luxovien ; vérifie la grille officielle de la saison auprès de ton club ou de la FFHM.</p>
+    </div>
+
+    <div class="panel">
+      <label class="pick">Exercice
+        <select id="exPick"></select>
+      </label>
+      <p class="chart-ttl" id="chartTtl"></p>
+      <div class="legend">
+        <span><i class="sw sw-plan"></i>Prévu</span>
+        <span><i class="sw sw-done"></i>Réalisé</span>
+      </div>
+      <div class="chart" id="chartLoad"></div>
+      <p class="tip" id="loadNote"></p>
+      <details class="how"><summary>Voir le tableau</summary><div id="tblLoad"></div></details>
+    </div>
+
+    <h2>Évolution des maxes</h2>
+    <div class="panel">
+      <div class="legend">
+        <span><i class="sw sw-sn"></i>Arraché</span>
+        <span><i class="sw sw-cj"></i>Épaulé-jeté</span>
+      </div>
+      <div class="chart" id="chartMax"></div>
+      <p class="tip" id="maxNote"></p>
+      <details class="how"><summary>Voir le tableau</summary><div id="tblMax"></div></details>
+    </div>
+    <h2>Mes données</h2>
+    <div class="panel">
+      <p class="tip" style="margin-top:0">Pour passer d'une version de la page à une autre (Claude ↔ GitHub) ou garder une copie de sécurité : copie tes données ici, puis colle-les dans l'autre version.</p>
+      <div class="io-btns">
+        <button class="io" id="exportBtn">Copier mes données</button>
+        <button class="io" id="importBtn">Importer des données</button>
+      </div>
+      <textarea id="ioText" class="io-text" rows="5" placeholder="Colle ici les données copiées depuis l'autre version, puis appuie sur « Importer des données »."></textarea>
+      <p class="tip" id="ioMsg"></p>
+    </div>
+    <p class="tip">« Réalisé » enregistre la charge affichée au moment où tu coches la première série d'un exercice. Si tu modifies la charge ensuite, la nouvelle valeur est retenue. Les maxes sont enregistrés à chaque modification dans « Mes maxes ».</p>
+  </div>
+
+  <div class="orn">✦</div>
+</div>
+<div class="tipbox" id="tipbox" role="status"></div>
+
+<script>
+/* =============== ÉCHAUFFEMENTS =============== */
+const WU = {
+  general:{t:"Montée en température",it:[
+    {n:"Rameur ou vélo",d:"4 min",w:"Progressif, jusqu'à transpirer légèrement."}]},
+  genoux:{t:"Genoux",it:[
+    {n:"Tibialis raises dos au mur",d:"2 × 15",w:"Renforce l'avant du tibia, protège le genou en réception basse."},
+    {n:"Mobilité cheville genou au mur",d:"2 × 10 / côté",w:"Genou vers l'avant au-dessus des orteils, talon au sol."},
+    {n:"Wall sit ou Spanish squat (isométrie)",d:"2 × 30–45 s",w:"Effet antalgique sur le tendon rotulien. Intensité 6/10, sans douleur."}]},
+  hanches:{t:"Hanches · mobilité",it:[
+    {n:"90/90 transitions",d:"2 × 6 / côté",w:"Assise au sol, jambes à 90°. Basculer les genoux d'un côté à l'autre sans les mains. Travaille la rotation interne et externe."},
+    {n:"Grenouille avec bascule (frog rock-back)",d:"1 × 10",w:"À quatre pattes, genoux écartés. Reculer les fesses vers les talons, dos plat. Ouvre les adducteurs."},
+    {n:"Cossack squat",d:"1 × 6 / côté",w:"Ouvre les adducteurs et prépare les réceptions larges."},
+    {n:"Squat gobelet tenu en bas",d:"2 × 30 s",w:"Kettlebell légère contre la poitrine, coudes qui écartent les genoux. Petits balancements pour gagner de l'amplitude."}]},
+  posterieur:{t:"Chaîne postérieure · activation",it:[
+    {n:"Pont fessier unilatéral",d:"1 × 10 / côté",w:"Serrer 2 s en haut. Réveille le fessier avant les tirages."},
+    {n:"Good morning à la barre",d:"1 × 10",w:"Hanches qui reculent, dos plat. Prépare la position du premier tirage."}]},
+  hanches_esc:{t:"Hanches",it:[
+    {n:"90/90 transitions",d:"1 × 6 / côté",w:"Rotation de hanche : utile pour les pieds hauts et les talons."},
+    {n:"Grenouille avec bascule",d:"1 × 10",w:"Ouvre les hanches pour rapprocher le bassin du mur."}]},
+  epaules:{t:"Épaules",it:[
+    {n:"Écartés à l'élastique",d:"2 × 15",w:"Réveille l'arrière d'épaule."},
+    {n:"Dislocations au bâton",d:"2 × 10",w:"Mobilité pour la position bras tendus au-dessus de la tête."},
+    {n:"Ouverture thoracique sur rouleau",d:"1 min",w:"Libère le haut du dos, souvent fermé après l'escalade."}]},
+  epaules_light:{t:"Épaules",it:[
+    {n:"Écartés à l'élastique",d:"1 × 15",w:"Réveille l'arrière d'épaule."},
+    {n:"Dislocations au bâton",d:"1 × 10",w:"Mobilité au-dessus de la tête."}]},
+  bar_cl:{t:"Barre à vide · épaulé-jeté",it:[
+    {n:"Tirage haut + muscle clean + tall clean",d:"3 × 3 chacun",w:"Coudes rapides, barre posée sur les épaules, pieds à plat."},
+    {n:"Front squat à la barre",d:"1 × 5",w:"Coudes hauts, descente contrôlée."},
+    {n:"Dip + drive (jerk)",d:"1 × 5",w:"Dip court et vertical, poids sur tout le pied."}]},
+  bar_sn:{t:"Barre à vide · arraché",it:[
+    {n:"Burgener : tirage haut, muscle snatch, snatch press, OHS, tall snatch",d:"2 × 3 chacun",w:"Barre collée au corps, se tirer vite sous la barre."},
+    {n:"Overhead squat lent",d:"1 × 5",w:"Pousser la barre vers le plafond, descente 3 s."}]},
+  bar_both:{t:"Barre à vide · les deux",it:[
+    {n:"Burgener arraché",d:"1 × 3 chacun",w:"Tirage haut, muscle snatch, snatch press, OHS."},
+    {n:"Muscle clean + front squat",d:"1 × 3",w:"Coudes rapides."},
+    {n:"Dip + drive (jerk)",d:"1 × 5",w:"Dip vertical."}]},
+  esc_gen:{t:"Corps",it:[
+    {n:"Corde à sauter ou rameur",d:"3 min",w:"Monter le cardio."},
+    {n:"Rotations bras, hanches, poignets",d:"1 min",w:"Articulations chaudes avant les prises."},
+    {n:"Scapula pull-ups à la barre",d:"2 × 8",w:"Omoplates qui descendent, bras tendus. Active les épaules pour la suspension."}]},
+  esc_doigts:{t:"Doigts (progressif)",it:[
+    {n:"Traversée ou voies très faciles",d:"8–10 min",w:"Grosses prises puis prises moyennes."},
+    {n:"Suspensions pieds au sol sur poutre",d:"3 × 10 s",w:"Charge croissante, de 40 à 70 %. Aucune douleur."},
+    {n:"Blocs progressifs",d:"4–6 blocs",w:"Du facile jusqu'à 2 niveaux sous ton max."}]},
+  esc_doigts_l:{t:"Doigts",it:[
+    {n:"Traversée ou voies très faciles",d:"10 min",w:"Grosses prises puis moyennes, en cherchant des pieds précis."},
+    {n:"Blocs progressifs",d:"3–4 blocs",w:"Du facile au modéré."}]}
+};
+const WU_DAY = {
+  lun:[],
+  mar:["esc_gen","hanches_esc","esc_doigts"],
+  mer:["general","hanches","posterieur","genoux","epaules_light","bar_cl"],
+  jeu:["esc_gen","hanches_esc","esc_doigts_l"],
+  ven:["general","hanches","posterieur","genoux","epaules","bar_sn"],
+  sam:["general","hanches","posterieur","genoux","epaules_light","bar_both"],
+  dim:["esc_gen","hanches_esc","esc_doigts_l"]
+};
+
+/* =============== EXERCICES =============== */
+const STRAPS = "Sangles conseillées : épargne les doigts pour l'escalade";
+const EX = {
+  hps:{n:"Hang power snatch",b:"sn",d:"Départ debout, barre au-dessus des genoux en prise large. Extension explosive puis réception bras tendus en demi-squat, au-dessus de 90°.",c:["Épaules devant la barre au départ","La barre frôle le haut des cuisses","Bras verrouillés activement à la réception"]},
+  ps:{n:"Power snatch",b:"sn",d:"Arraché depuis le sol avec réception haute. Premier tirage contrôlé, extension explosive au niveau des hanches.",c:["Dos gainé, angle constant jusqu'aux genoux","Accélération après le genou","Pieds qui se replacent largeur d'épaules"]},
+  hs:{n:"Hang snatch (complet)",b:"sn",d:"Départ barre au-dessus des genoux, extension puis réception en squat complet.",c:["Se tirer sous la barre, ne pas l'attendre","Réception stable 1 s","Barre au-dessus de la nuque"]},
+  sn:{n:"Arraché",b:"sn",d:"Mouvement complet depuis le sol avec réception en squat profond.",c:["Premier tirage lent, deuxième explosif","Barre proche tout du long","Tenir la réception 1 s"]},
+  sb:{n:"Snatch balance",b:"sn",d:"Barre sur les trapèzes, prise d'arraché. Petit dip, impulsion, puis tu te tires sous la barre en squat complet, bras verrouillés.",c:["Mouvement vers le bas, pas vers le haut","Pieds qui se replacent","Verrouiller avant d'arriver en bas"]},
+  ohs:{n:"Overhead squat",b:"sn",d:"Barre au-dessus de la tête en prise d'arraché, squat lent et contrôlé jusqu'en bas.",c:["Pousser la barre vers le plafond","Buste vertical","Descente 2–3 s"]},
+  snp:{n:"Tirage d'arraché",b:"sn",d:"Mouvement de l'arraché jusqu'à l'extension complète et au haussement d'épaules, sans réception.",c:["Bras longs jusqu'à la fin de l'extension","Monter sur la pointe des pieds",STRAPS]},
+  snsd:{n:"Soulevé de terre arraché avec pauses",b:"sn",d:"Prise d'arraché, pause 2 s juste sous les genoux puis 2 s mi-cuisses.",c:["Épaules devant la barre pendant les pauses","Dos gainé",STRAPS]},
+  hpc:{n:"Hang power clean",b:"cj",d:"Départ barre au-dessus des genoux. Extension explosive puis réception sur les épaules en demi-squat, au-dessus de 90°.",c:["Coudes qui tournent vite","Réception pieds à plat","Barre qui frôle les cuisses"]},
+  pc_pj:{n:"Power clean + push jerk",b:"cj",d:"Un power clean depuis le sol puis un push jerk. Barre au sol, on recommence pour la 2e répétition.",c:["Dip court et vertical","Re-flexion sous la barre","Verrouiller avant de reposer"]},
+  hc:{n:"Hang clean (complet)",b:"cj",d:"Départ barre au-dessus des genoux, extension puis réception en front squat complet.",c:["Se tirer sous la barre","Coudes hauts en bas","Rebond contrôlé pour remonter"]},
+  cl:{n:"Épaulé",b:"cj",d:"Épaulé complet depuis le sol, réception en squat.",c:["Premier tirage contrôlé","Extension complète avant de passer sous","Coudes hauts"]},
+  cl_pj:{n:"Épaulé + push jerk",b:"cj",d:"Épaulé complet puis push jerk. Barre au sol entre les répétitions.",c:["Reprendre son souffle avant le jerk","Dip vertical","Re-flexion sous la barre"]},
+  cx_pull_hc_fs:{n:"Complexe : tirage d'épaulé + hang clean + front squat",b:"cj",d:"Sans lâcher la barre : 1 tirage d'épaulé depuis le sol, tu redescends la barre au-dessus des genoux, 1 hang clean, puis 1 front squat. = 1 série.",c:["Le tirage fixe la trajectoire, le hang clean la reprend tout de suite","Front squat : coudes hauts, descente contrôlée","Charge limitée par le hang clean"],w:"Apprend à enchaîner extension et passage sous la barre, et renforce la position basse de réception."},
+  cx_hs_ohs:{n:"Complexe : hang snatch + 2 overhead squats",b:"sn",d:"1 hang snatch avec réception complète, tu te relèves, puis 2 overhead squats sans reposer la barre. = 1 série.",c:["Tenir 1 s en bas de chaque OHS","Pousser la barre vers le plafond","Charge limitée par l'overhead squat : baisse si le buste plonge"],w:"Stabilité et mobilité en position basse d'arraché : hanches, chevilles et épaules sous charge, ton point à travailler."},
+  cx_hc_cl:{n:"Complexe : hang clean + épaulé",b:"cj",d:"1 hang clean (départ au-dessus des genoux), tu reposes la barre au sol sans la lâcher, puis 1 épaulé depuis le sol. = 1 série.",c:["Le hang clean donne la bonne position haute","L'épaulé doit retrouver exactement cette position en passant le genou","Barre collée aux jambes sur les deux"],w:"Transfert du hang vers le sol : la position travaillée au bloc 1 se retrouve dans le mouvement complet."},
+  cx_hs_sn:{n:"Complexe : hang snatch + arraché",b:"sn",d:"1 hang snatch (départ au-dessus des genoux), tu reposes la barre au sol, puis 1 arraché depuis le sol. = 1 série.",c:["Même position haute sur les deux","Premier tirage lent sur l'arraché","Réception complète, 1 s en bas"],w:"Transfert du hang vers le sol pour l'arraché."},
+  cx_psn_sn:{n:"Complexe : arraché avec pause au genou + arraché",b:"sn",d:"1 arraché avec une pause de 2 s juste sous les genoux, puis 1 arraché normal enchaîné. = 1 série.",c:["Pendant la pause : épaules devant la barre, dos plat, poids sur tout le pied","Pas de rebond pour repartir","Le 2e arraché garde la même trajectoire"],w:"Renforce la chaîne postérieure dans la position du premier tirage et corrige les hanches qui montent trop vite."},
+  cl_sj:{n:"Épaulé + jerk fendu",b:"cj",d:"Épaulé complet puis jerk fendu, le mouvement de compétition.",c:["Fente courte et équilibrée","Pied avant à plat, talon arrière levé","Ramener pied avant puis pied arrière"]},
+  cj_l:{n:"Épaulé-jeté léger",b:"cj",d:"Quelques épaulés-jetés légers pour garder les sensations avant le test.",c:["Vitesse et précision","S'arrêter frais"]},
+  clp:{n:"Tirage d'épaulé",b:"cj",d:"Mouvement de l'épaulé jusqu'à l'extension complète et au haussement d'épaules, sans réception.",c:["Bras longs","Extension complète",STRAPS]},
+  clsd:{n:"Soulevé de terre épaulé avec pauses",b:"cj",d:"Prise d'épaulé, pauses 2 s sous les genoux et mi-cuisses.",c:["Épaules devant la barre","Genoux qui reculent",STRAPS]},
+  pp:{n:"Push press",b:"cj",d:"Barre en rack. Petit dip, impulsion des jambes, finition aux bras jambes tendues.",c:["Dip court, buste droit","Poids sur tout le pied","Tête qui avance sous la barre en fin"]},
+  sjr:{n:"Jerk fendu (racks)",b:"cj",d:"Barre en rack. Dip, impulsion, fente rapide sous la barre, bras verrouillés.",c:["Fente d'environ une longueur de pied et demie","Hanches sous la barre","Genou arrière légèrement fléchi"]},
+  fsq:{n:"Front squat",b:"fs",d:"Barre devant sur les épaules, coudes hauts. Squat complet, remontée explosive.",c:["Coudes hauts tout du long","Buste vertical","Genoux dans l'axe des pieds"]},
+  bsq:{n:"Back squat",b:"bs",d:"Barre haute sur les trapèzes, squat complet, remontée explosive.",c:["Gainage avant chaque répétition","Descente contrôlée","Pousser le sol"]},
+  test_sn:{n:"Test arraché",b:"sn",d:"Montée : 50 %×2, 60 %×2, 70 %×1, 80 %×1, 85 %×1, puis 3 essais à partir de ~93 %. Sauts de 1 à 2 kg. Max technique : on s'arrête dès que la technique se dégrade.",c:["2 min 30 entre les essais lourds","Filme chaque essai"]},
+  test_cj:{n:"Test épaulé-jeté",b:"cj",d:"Même montée, 10 à 15 min après le dernier arraché. Le max retenu est un mouvement propre.",c:["Ne pas rater 2 fois la même charge","Après le test : mettre à jour les maxes"]},
+
+  /* renfo */
+  bss:{n:"Split squat bulgare",d:"Pied arrière posé sur un banc, haltères en main. Descente contrôlée jusqu'à ce que le genou arrière frôle le sol.",c:["Buste légèrement penché vers l'avant","Genou avant dans l'axe du pied","Descente 2 s"],w:"Renforce le quadriceps et le fessier jambe par jambe, protège le genou en réception basse."},
+  ohp:{n:"Développé militaire strict",d:"Debout, barre en rack. Pousser au-dessus de la tête sans impulsion des jambes, fessiers et abdos serrés.",c:["Tête qui passe sous la barre en fin","Côtes rentrées, pas de cambrure","Verrouiller les coudes en haut","Double progression : même charge tant que tu ne fais pas 3 × 8 propres. Si une série s'arrête à 6 ou 7, coche « C'était dur »"],w:"Antagoniste de l'escalade et base de stabilité pour le jerk."},
+  nordic:{n:"Nordic hamstring (excentrique)",d:"À genoux, chevilles bloquées. Se laisser tomber vers l'avant le plus lentement possible, se rattraper avec les mains, revenir en poussant.",c:["Hanches tendues, corps aligné","Freiner au maximum","Amplitude progressive au fil des semaines"],w:"Ischios solides : protège le genou et aide les crochets de talon."},
+  wrist:{n:"Extension des poignets",d:"Avant-bras sur la cuisse, paume vers le bas, haltère léger. Relever le poignet puis descendre en 3 s.",c:["Mouvement lent","Pas d'élan"],w:"Équilibre les fléchisseurs très sollicités en escalade : prévient l'épicondylite."},
+  rdl:{n:"Soulevé de terre roumain",d:"Barre en main, genoux légèrement fléchis. Descendre en reculant les hanches jusqu'à mi-tibia, dos plat, puis remonter.",c:["Barre collée aux jambes","Étirement des ischios, pas d'arrondi",STRAPS],w:"Chaîne postérieure pour le premier tirage."},
+  er:{n:"Rotations externes à la poulie ou à l'élastique",d:"Coude collé au corps à 90°, tourner l'avant-bras vers l'extérieur, retour lent.",c:["Coude fixe","Charge légère, mouvement propre"],w:"Coiffe des rotateurs : protège l'épaule pour l'escalade et les réceptions bras tendus."},
+  bench:{n:"Développé couché",d:"Allongée sur le banc, omoplates serrées, pieds ancrés au sol. Descendre la barre au bas des pectoraux, coudes à 45°, puis pousser.",c:["Omoplates serrées tout du long","Barre qui touche la poitrine sans rebond","Épaules fatiguées après l'escalade du jeudi → remplacer par 3 × 10–12 pompes"],w:"Poussée horizontale, antagoniste de l'escalade, avec une charge facile à faire progresser."},
+  pushup:{n:"Pompes",d:"Corps gainé, poitrine jusqu'au sol, coudes à 45°.",c:["Bassin aligné","Omoplates qui s'écartent en haut"],w:"Version légère du développé couché pour la semaine de déload."},
+  pallof:{n:"Pallof press",d:"De profil à la poulie ou à l'élastique, mains contre la poitrine. Tendre les bras devant soi sans laisser le buste tourner, tenir 2 s.",c:["Bassin face à l'avant","Respiration contrôlée"],w:"Gainage anti-rotation : utile en dévers et pour garder les pieds sur le mur."},
+  kneewall:{n:"Genou au mur lesté",d:"En fente, pied avant à une dizaine de cm du mur, kettlebell posée sur le genou avant. Amener le genou vers le mur sans décoller le talon, tenir 2 s, revenir.",c:["Talon collé au sol","Genou dans l'axe du 2e orteil","Reculer le pied d'1 cm quand c'est facile"],w:"Dorsiflexion de cheville sous charge : permet au genou d'avancer en réception basse sans que le buste plonge."},
+  cossackg:{n:"Cossack squat gobelet",d:"Pieds très écartés, kettlebell contre la poitrine. Descendre sur une jambe, l'autre tendue pointe vers le haut, puis passer de l'autre côté.",c:["Talon de la jambe pliée au sol","Buste le plus droit possible","Descendre seulement jusqu'où le dos reste plat"],w:"Mobilité des adducteurs et de la hanche en charge, plus la dorsiflexion de la jambe pliée."},
+  soleus:{n:"Mollet soléaire assis",d:"Assise, genoux à 90°, avant des pieds sur un disque, charge sur les cuisses. Descendre les talons au maximum, pause 1 s, monter.",c:["Amplitude complète, en bas surtout","Descente lente sur 2 s"],w:"Le soléaire raide limite la dorsiflexion : le renforcer en grande amplitude l'assouplit."},
+  liftoff:{n:"90/90 avec décollés",d:"Position 90/90 au sol, buste droit. Décoller le pied et le genou de la jambe arrière du sol sans pencher le buste, tenir 2 s. Puis la jambe avant.",c:["Buste droit, mains au sol si besoin","Petite amplitude au début, c'est normal"],w:"Force en rotation interne et externe de hanche, en fin d'amplitude : là où les hanches sont verrouillées."},
+  gobletp:{n:"Squat gobelet avec pause",d:"Kettlebell contre la poitrine, descendre en squat complet, pause 5 s en bas en poussant les genoux vers l'extérieur avec les coudes, puis remonter.",c:["Talons au sol","Respirer pendant la pause","Chercher à descendre un peu plus à chaque répétition"],w:"Mobilité de hanche et de cheville dans la position de réception, avec une charge qui aide à descendre."},
+  heeldrop:{n:"Descente excentrique du mollet",d:"Avant des pieds sur une marche. Monter sur deux pieds, descendre sur un pied en 3 s, pause 3 s talon en bas.",c:["Descente lente","Genou tendu puis genou fléchi une série sur deux","Lester avec un haltère quand c'est facile"],w:"Étirement sous charge du mollet : un des moyens les plus efficaces pour gagner en dorsiflexion."},
+  ankrock:{n:"Fente cheville chargée",d:"Un genou au sol, kettlebell posée sur la cuisse avant. Avancer le genou avant au-delà des orteils, talon au sol, tenir 3 s, revenir.",c:["Talon collé","Avancer en ligne droite, pas en dedans"],w:"Dorsiflexion sous charge, version plus intense que le genou au mur."},
+  airplane:{n:"Hip airplane",d:"Debout sur une jambe, buste penché à l'horizontale. Ouvrir le bassin vers le plafond, puis le refermer vers le sol, lentement. Main sur un appui au début.",c:["Mouvement qui vient de la hanche d'appui","Lent et contrôlé"],w:"Rotation de hanche en charge et stabilité : relie mobilité et chaîne postérieure."},
+  couchact:{n:"Étirement du canapé actif",d:"Position du couch stretch. Serrer le fessier et pousser le genou contre le mur 5 s, relâcher et descendre un peu plus loin.",c:["Bassin rentré","5 s de contraction, 10 s de relâchement"],w:"Fléchisseurs de hanche : cette raideur bascule le bassin et empêche le fessier de bien travailler."},
+  back45:{n:"Extension à 45° accent fessiers",d:"Banc à 45°, pieds tournés vers l'extérieur, disque contre la poitrine. Descendre en arrondissant légèrement le haut du dos, remonter en poussant les hanches dans le coussin.",c:["Le mouvement part des hanches, pas des lombaires","Serrer les fessiers 1 s en haut","Pas d'hyperextension"],w:"Cible fessiers et ischios sans charger la colonne : un point faible de ta chaîne postérieure."},
+  slrdl:{n:"Soulevé de terre roumain unilatéral",d:"Un haltère dans chaque main, sur une jambe. Pencher le buste en reculant la jambe libre, dos plat, jusqu'à sentir l'étirement de l'ischio, puis remonter.",c:["Bassin horizontal, ne pas ouvrir la hanche","Genou d'appui légèrement fléchi","S'aider d'un appui léger au début"],w:"Ischios et fessiers jambe par jambe, avec du gainage de hanche : corrige les asymétries."},
+  hipthrust:{n:"Hip thrust",d:"Haut du dos sur un banc, barre sur les hanches. Monter jusqu'à l'alignement, serrer 1 s, redescendre.",c:["Menton rentré","Tibias verticaux en haut","Pas de cambrure en haut"],w:"Extension de hanche pour le deuxième tirage."},
+  stepdown:{n:"Step-down excentrique",d:"Debout sur une marche, descendre le talon de l'autre jambe vers le sol en 3 s, genou dans l'axe, puis remonter.",c:["Genou qui ne rentre pas vers l'intérieur","Bassin horizontal","Contrôle total"],w:"Exercice de référence pour la santé du genou et le contrôle du quadriceps."},
+  hlr:{n:"Relevés de jambes suspendu",d:"Suspendu à la barre, monter les genoux puis les jambes tendues vers la barre, sans balancer.",c:["Épaules engagées","Enrouler le bassin","Descente lente"],w:"Gainage spécifique escalade : garder les pieds sur le mur en dévers."},
+  cop:{n:"Planche Copenhague",d:"Planche latérale, jambe du dessus posée sur un banc, jambe du dessous en l'air.",c:["Corps aligné","Commencer genou sur le banc si trop dur"],w:"Adducteurs : stabilité du genou et des hanches en réception et en grand écart."},
+
+  /* escalade */
+  hang:{n:"Suspensions max (poutre)",d:"Réglette de 20 mm, prise semi-arquée, 10 s de suspension avec un lest qui laisse 2–3 s de marge. 3 min de repos.",c:["Épaules engagées, bras quasi tendus","Arrêter au moindre signal douloureux","Si tu grimpes depuis moins de 2 ans : remplace par des suspensions pieds au sol"],w:"La méthode la plus efficace pour la force des doigts."},
+  limit:{n:"Bloc à la limite",d:"4 à 6 blocs proches de ton max, 3 à 5 essais chacun, 3–4 min de repos entre les essais.",c:["Essais de qualité, pas d'enchaînement fatigué","Varier les styles : dévers, réglettes, coordination","Arrêter quand la qualité baisse"],w:"Développe la force maximale et le recrutement."},
+  campus:{n:"Mouvements dynamiques",d:"Blocs à mouvements jetés ou coordination, sur grosses prises.",c:["Grosses prises seulement","Réception contrôlée"],w:"Puissance et coordination, sans stress sur les doigts."},
+  tech:{n:"Exercices techniques",d:"Sur des blocs faciles : pieds silencieux, drapeaux, crochets de talon et de pointe, lectures avant de grimper.",c:["Un thème par séance","Grimper lentement et précisément"],w:"La technique est le levier le plus rapide pour progresser."},
+  fourx4:{n:"4 × 4 en bloc",d:"4 blocs 2–3 niveaux sous ton max, enchaînés sans pause. 4 séries, 4 min de repos.",c:["Rester propre même fatiguée","Si tu chutes, reprendre au mouvement"],w:"Résistance : enchaîner les mouvements difficiles."},
+  arc:{n:"ARC (continuité)",d:"Grimper sans s'arrêter sur des voies ou une traversée faciles, avec une légère congestion des avant-bras, jamais au point de lâcher.",c:["Intensité 4–5/10","Respiration fluide","Repos au sol égal au temps de grimpe"],w:"Endurance de base et récupération active après la séance lourde du samedi."},
+  vol:{n:"Volume de voies ou blocs faciles",d:"Enchaîner des voies ou blocs de niveau confortable, en soignant les placements.",c:["Pas de projet","Jamais de chute de fatigue"],w:"Accumule des heures de mur sans fatigue nerveuse."},
+  m_9090:{n:"90/90 transitions actives",d:"Assise au sol, une jambe devant et une derrière, toutes deux à 90°. Basculer les genoux de l'autre côté sans les mains, buste droit.",c:["Bouger lentement","S'aider des mains au début si besoin"],w:"Rotation interne et externe de hanche, souvent la plus verrouillée."},
+  m_couch:{n:"Étirement du canapé (couch stretch)",d:"Genou arrière contre un mur ou un canapé, tibia vertical, pied avant au sol. Serrer le fessier et redresser le buste.",c:["Bassin rentré, pas de cambrure","Respiration lente"],w:"Fléchisseurs de hanche raides = bassin basculé et fessiers qui travaillent mal."},
+  m_pigeon:{n:"Pigeon",d:"Jambe avant pliée devant soi, jambe arrière tendue. Descendre le buste vers l'avant.",c:["Hanches droites","Sur un banc si le sol est trop intense"],w:"Ouvre la rotation externe et le fessier profond."},
+  m_frog:{n:"Grenouille avec bascule",d:"À quatre pattes, genoux très écartés, pieds en dehors. Reculer les fesses vers les talons, dos plat, puis revenir.",c:["Aller jusqu'au point de tension, pas au-delà","Dos plat tout du long"],w:"Adducteurs : grand écart et réceptions pieds larges."},
+  m_deep:{n:"Squat profond tenu",d:"Squat complet, talons au sol, en se tenant à un montant si besoin. Pousser les genoux vers l'extérieur avec les coudes.",c:["Talons au sol (cale sous les talons au début si nécessaire)","Buste le plus droit possible"],w:"La position de réception de l'arraché et de l'épaulé."},
+  m_cars:{n:"Cercles de hanche contrôlés (CARs)",d:"À quatre pattes ou debout, faire le plus grand cercle possible avec le genou, très lentement, sans bouger le bassin.",c:["Tout le reste du corps immobile","Lent : 10 s par cercle"],w:"Fait travailler la hanche dans toute son amplitude active."},
+  m_bridge:{n:"Pont fessier unilatéral isométrique",d:"Sur le dos, un pied au sol, l'autre jambe tendue. Monter le bassin et tenir.",c:["Bassin horizontal","Serrer le fessier, pas les lombaires"],w:"Renforce la chaîne postérieure en fin de routine, sans fatigue."},
+  mob:{n:"Mobilité hanches",d:"Pigeon, grenouille, ouverture en fente basse.",c:["Respiration lente","Pas de douleur"],w:"Hanches ouvertes : pieds hauts, mur plus proche, meilleure réception en squat."}
+};
+
+/* =============== HALTÉRO : BLOCS ===============
+   m = 1 → mouvement principal · s = séries [S1..S4] · r = reps · p = % du max */
+const BLOCKS = [
+ {id:"B1",name:"Positions & vitesse",rpe:"RPE 6–7",
+  goal:"Départs suspendus avec réception complète en squat : beaucoup de répétitions légères pour fixer le placement et la position basse. (S1 faite en versions power.)",
+  days:{
+   mer:{t:"Dominante épaulé-jeté",ex:[
+     {e:"hps",s:[4,0,0,0],r:"× 2",p:[55,0,0,0]},
+     {e:"hs",s:[0,4,4,3],r:"× 2",p:[0,55,58,52]},
+     {e:"hpc",m:1,s:[5,0,0,0],r:"× 3",p:[60,0,0,0]},
+     {e:"hc",m:1,s:[0,5,0,0],r:"× 3",p:[0,62,0,0]},
+     {e:"cx_pull_hc_fs",m:1,s:[0,0,5,3],r:"× (1+1+1)",p:[0,0,65,58]},
+     {e:"pc_pj",m:1,s:[5,0,0,0],r:"× 2",p:[65,0,0,0]},
+     {e:"cl_pj",m:1,s:[0,5,5,3],r:"× 2",p:[0,66,68,60]},
+     {e:"clp",s:[3,3,3,2],r:"× 4",p:[80,85,90,75]},
+     {e:"fsq",s:[4,4,4,3],r:"× 5",p:[60,63,66,58]}]},
+   ven:{t:"Dominante arraché",ex:[
+     {e:"hps",m:1,s:[6,0,0,0],r:"× 3",p:[55,0,0,0]},
+     {e:"cx_hs_ohs",m:1,s:[0,5,5,4],r:"× (1+2)",p:[0,55,58,52]},
+     {e:"sb",m:1,s:[4,4,4,3],r:"× 3",p:[40,45,50,40]},
+     {e:"hpc",s:[4,0,0,0],r:"× 2",p:[55,0,0,0]},
+     {e:"hc",s:[0,4,4,3],r:"× 2",p:[0,58,60,55]},
+     {e:"snp",s:[3,3,3,2],r:"× 4",p:[80,85,90,75]},
+     {e:"pp",s:[3,3,3,2],r:"× 5",p:[55,58,62,52]}]},
+   sam:{t:"Les deux · intensité moyenne",ex:[
+     {e:"ps",m:1,s:[5,0,0,0],r:"× 2",p:[60,0,0,0]},
+     {e:"sn",m:1,s:[0,5,5,3],r:"× 2",p:[0,60,64,56]},
+     {e:"pc_pj",m:1,s:[5,0,0,0],r:"× 2",p:[62,0,0,0]},
+     {e:"cl_pj",m:1,s:[0,5,5,3],r:"× 2",p:[0,64,68,58]},
+     {e:"bsq",s:[4,4,4,3],r:"× 6",p:[70,73,76,68]}]}
+  }},
+ {id:"B2",name:"Du hang au sol",rpe:"RPE 7",
+  goal:"Réception complète depuis le hang, premiers mouvements complets du sol, arrivée du jerk fendu.",
+  days:{
+   mer:{t:"Dominante épaulé-jeté",ex:[
+     {e:"hs",s:[4,4,4,3],r:"× 2",p:[55,58,60,52]},
+     {e:"cx_hc_cl",m:1,s:[5,5,5,3],r:"× (1+1)",p:[65,68,70,60]},
+     {e:"cl_pj",m:1,s:[5,5,5,3],r:"× 2",p:[68,72,75,62]},
+     {e:"clsd",s:[3,3,3,2],r:"× 4",p:[80,85,90,75]},
+     {e:"fsq",s:[4,4,4,3],r:"× 4",p:[65,68,72,62]}]},
+   ven:{t:"Dominante arraché",ex:[
+     {e:"cx_hs_sn",m:1,s:[6,6,6,4],r:"× (1+1)",p:[58,62,64,55]},
+     {e:"sb",m:1,s:[4,4,4,3],r:"× 2",p:[50,55,60,45]},
+     {e:"hc",s:[4,4,4,3],r:"× 2",p:[58,60,62,55]},
+     {e:"snsd",s:[3,3,3,2],r:"× 3",p:[75,80,85,70]},
+     {e:"sjr",s:[4,4,4,3],r:"× 2",p:[55,60,65,50]}]},
+   sam:{t:"Les deux · intensité moyenne",ex:[
+     {e:"sn",m:1,s:[5,5,5,3],r:"× 2",p:[60,64,68,58]},
+     {e:"cl",m:1,s:[5,5,5,3],r:"× 2",p:[68,72,76,62]},
+     {e:"bsq",s:[4,4,4,3],r:"× 5",p:[74,77,80,70]},
+     {e:"snp",s:[3,3,3,2],r:"× 3",p:[90,95,100,80]}]}
+  }},
+ {id:"B3",name:"Mouvements complets",rpe:"RPE 7–8",
+  goal:"Arraché et épaulé-jeté complets depuis le sol, en doubles. L'intensité monte jusqu'à 80 %.",
+  days:{
+   mer:{t:"Dominante épaulé-jeté",ex:[
+     {e:"sn",s:[4,4,4,3],r:"× 2",p:[60,62,65,58]},
+     {e:"cl_sj",m:1,s:[6,6,6,4],r:"× 2",p:[70,74,78,65]},
+     {e:"clp",s:[4,4,4,3],r:"× 3",p:[90,95,100,85]},
+     {e:"fsq",s:[5,5,5,3],r:"× 3",p:[70,74,78,65]}]},
+   ven:{t:"Dominante arraché",ex:[
+     {e:"cx_psn_sn",m:1,s:[6,6,6,4],r:"× (1+1)",p:[62,65,68,58]},
+     {e:"ohs",s:[3,3,3,2],r:"× 3",p:[55,60,65,50]},
+     {e:"cl",s:[4,4,4,3],r:"× 2",p:[62,64,66,60]},
+     {e:"snp",s:[3,3,3,2],r:"× 3",p:[90,95,100,85]}]},
+   sam:{t:"Les deux · intensité moyenne",ex:[
+     {e:"sn",m:1,s:[5,5,5,3],r:"× 2",p:[68,72,76,62]},
+     {e:"cl_sj",m:1,s:[5,5,5,3],r:"× 2",p:[68,72,76,62]},
+     {e:"bsq",s:[5,5,5,3],r:"× 4",p:[76,79,82,72]}]}
+  }},
+ {id:"B4",name:"Consolidation & test",rpe:"RPE 8 · S4 test",test:true,
+  goal:"Doubles plus lourds sur les mouvements complets, puis semaine 4 allégée avec test des maxes le samedi.",
+  days:{
+   mer:{t:"Dominante épaulé-jeté",ex:[
+     {e:"sn",s:[3,3,3,3],r:"× 2",p:[62,65,65,55]},
+     {e:"cl_sj",m:1,s:[5,5,4,0],r:"× 2",p:[74,78,82,0]},
+     {e:"cj_l",m:1,s:[0,0,0,4],r:"× 1",p:[0,0,0,60]},
+     {e:"clp",s:[3,3,3,0],r:"× 3",p:[95,100,100,0]},
+     {e:"fsq",s:[4,4,3,0],r:"× 3",p:[75,78,82,0]}]},
+   ven:{t:"Dominante arraché",ex:[
+     {e:"sn",m:1,s:[5,5,4,3],r:"× 2",p:[72,76,80,58]},
+     {e:"ohs",s:[3,3,2,0],r:"× 3",p:[60,62,65,0]},
+     {e:"cl",s:[3,3,3,2],r:"× 2",p:[65,68,70,55]},
+     {e:"sjr",s:[3,3,3,0],r:"× 2",p:[70,72,75,0]}]},
+   sam:{t:"Les deux · intensité moyenne",testT:"Test des maxes",ex:[
+     {e:"sn",m:1,s:[5,5,5,0],r:"× 2",p:[74,78,82,0]},
+     {e:"cl_sj",m:1,s:[4,4,4,0],r:"× 2",p:[74,77,80,0]},
+     {e:"test_sn",m:1,s:[0,0,0,1],r:"max",p:[0,0,0,100]},
+     {e:"test_cj",m:1,s:[0,0,0,1],r:"max",p:[0,0,0,100]},
+     {e:"bsq",s:[4,4,3,0],r:"× 3",p:[80,84,88,0]}]}
+  }}
+];
+
+/* =============== RENFO (identique dans tous les blocs) ===============
+   k = charge proposée [S1..S4], null = poids du corps · u = unité */
+/* =============== MOBILITÉ ACTIVE · entre les séries d'haltéro ===============
+   Se fait pendant les temps de repos des mouvements principaux : ne rallonge pas la séance. */
+const MOBS = {
+  mer:[
+    {e:"kneewall",s:[3,3,3,2],r:"× 8 / côté",k:[8,10,12,8],u:"kg sur le genou"},
+    {e:"cossackg",s:[3,3,3,2],r:"× 5 / côté",k:[8,10,12,8],u:"kg"},
+    {e:"soleus",s:[3,3,3,2],r:"× 12",k:[20,20,25,20],u:"kg"}],
+  ven:[
+    {e:"liftoff",s:[3,3,3,2],r:"× 5 / côté",k:null},
+    {e:"gobletp",s:[3,3,3,2],r:"× 5 · pause 5 s",k:[12,14,16,12],u:"kg"},
+    {e:"heeldrop",s:[3,3,3,2],r:"× 8 · pause 3 s",k:null}],
+  sam:[
+    {e:"ankrock",s:[3,3,3,2],r:"× 8 / côté",k:[12,14,16,12],u:"kg"},
+    {e:"airplane",s:[3,3,3,2],r:"× 4 / côté",k:null},
+    {e:"couchact",s:[2,2,2,2],r:"× 5 contractions / côté",k:null}]
+};
+const RENFO = {
+  mer:[
+    {e:"bss",s:[3,3,3,2],r:"× 8 / jambe",k:[8,9,10,8],u:"kg / main"},
+    {e:"ohp",s:[3,3,3,2],r:"× 6–8",k:[27.5,30,30,25],u:"kg"},
+    {e:"nordic",s:[3,3,3,2],r:"× 5",k:null},
+    {e:"back45",s:[3,3,3,2],r:"× 12",k:[10,10,15,5],u:"kg (disque)"},
+    {e:"wrist",s:[2,2,2,2],r:"× 15",k:[4,4,5,4],u:"kg"}],
+  ven:[
+    {e:"rdl",s:[3,3,3,2],r:"× 8",k:[70,75,80,60],u:"kg"},
+    {e:"er",s:[3,3,3,2],r:"× 12 / bras",k:[2.5,2.5,3,2.5],u:"kg"},
+    {e:"bench",s:[3,3,3,0],r:"× 6",k:[60,62.5,65,0],u:"kg"},
+    {e:"pushup",s:[0,0,0,2],r:"× 10–12",k:null},
+    {e:"pallof",s:[3,3,3,2],r:"× 10 / côté",k:null}],
+  sam:[
+    {e:"hipthrust",s:[3,3,3,2],r:"× 10",k:[70,75,80,65],u:"kg"},
+    {e:"slrdl",s:[3,3,3,2],r:"× 8 / jambe",k:[12,14,16,12],u:"kg / main"},
+    {e:"stepdown",s:[3,3,3,2],r:"× 8 / jambe",k:null},
+    {e:"hlr",s:[3,3,3,2],r:"× 8",k:null},
+    {e:"cop",s:[2,2,2,2],r:"× 20 s / côté",k:null}]
+};
+
+/* =============== ESCALADE (identique dans tous les blocs, S4 allégée) =============== */
+const CLIMB = {
+  mar:{t:"Force · doigts et bloc à la limite",
+    goal:"Le seul jour de grimpe intense de la semaine, doigts frais après le repos du lundi.",
+    ex:[
+      {e:"hang",s:[5,5,6,3],r:"× 10 s",k:[0,0,0,0],u:"kg lest"},
+      {e:"limit",s:[5,5,6,3],r:"blocs · 3–5 essais"},
+      {e:"campus",s:[4,4,4,0],r:"blocs"},
+      {e:"wrist",s:[2,2,2,2],r:"× 15",k:[4,4,5,4],u:"kg"}]},
+  jeu:{t:"Technique · placements et résistance",
+    goal:"Intensité modérée : la séance d'arraché technique a lieu le lendemain.",
+    ex:[
+      {e:"tech",s:[3,3,3,2],r:"thèmes × 10 min"},
+      {e:"fourx4",s:[0,4,4,0],r:"séries"},
+      {e:"vol",s:[4,0,0,4],r:"blocs faciles"},
+      {e:"mob",s:[1,1,1,1],r:"× 5 min"}]},
+  dim:{t:"Endurance · volume facile",
+    goal:"Après la séance lourde du samedi : grimper beaucoup, mais facile. Pas de projet, pas de dévers intense.",
+    ex:[
+      {e:"arc",s:[3,3,3,2],r:"× 10–15 min"},
+      {e:"vol",s:[6,6,6,4],r:"voies ou blocs"},
+      {e:"mob",s:[1,1,1,1],r:"× 5 min"}]}
+};
+/* =============== MOBILITÉ (lundi, ou un soir de la semaine) =============== */
+const MOB = {t:"Routine hanches et chaîne postérieure",
+  goal:"15 min au calme, le jour de repos. Des hanches qui bougent mieux améliorent la réception en squat, les positions de tirage et les placements de pieds en escalade.",
+  ex:[
+    {e:"m_9090",s:[3,3,3,3],r:"× 6 / côté"},
+    {e:"m_couch",s:[2,2,2,2],r:"× 60 s / côté"},
+    {e:"m_pigeon",s:[2,2,2,2],r:"× 60 s / côté"},
+    {e:"m_frog",s:[2,2,2,2],r:"× 10"},
+    {e:"m_deep",s:[3,3,3,3],r:"× 45 s"},
+    {e:"m_cars",s:[2,2,2,2],r:"× 5 / côté"},
+    {e:"m_bridge",s:[3,3,3,3],r:"× 30 s / côté"}]};
+const DAYS = {
+  lun:{s:"Lun",f:"Lundi",type:"m"},
+  mar:{s:"Mar",f:"Mardi",type:"c"},mer:{s:"Mer",f:"Mercredi",type:"h"},
+  jeu:{s:"Jeu",f:"Jeudi",type:"c"},ven:{s:"Ven",f:"Vendredi",type:"h"},
+  sam:{s:"Sam",f:"Samedi",type:"h"},dim:{s:"Dim",f:"Dimanche",type:"c"}
+};
+const BASE = {sn:"arraché",cj:"épaulé-jeté",bs:"back squat",fs:"front squat"};
+
+/* =============== ÉTAT =============== */
+let S={b:0,w:0,d:"mer",wuOpen:true,tab:"prog",ex:"bsq"};
+let M={sn:45,cj:60,bs:95,fs:80,round:1,bar:15};
+let OV={},DONE={},WD={},LOG={},MH=[],MOVED={},BON={};
+let GOAL={sn:71,cj:90,hs:68,hc:87,ps:61,pc:76,pp:65,bs:121,fs:100,ohs:71},REC={};
+let BONUSON=false,LOGP={},HARD={};
+function load(){
+  try{
+    S=Object.assign(S,JSON.parse(localStorage.getItem("hc3-view")||"{}"));
+    M=Object.assign(M,JSON.parse(localStorage.getItem("hc-max")||"{}"));
+    OV=JSON.parse(localStorage.getItem("hc3-ov")||"{}");
+    DONE=JSON.parse(localStorage.getItem("hc3-done")||"{}");
+    WD=JSON.parse(localStorage.getItem("hc3-wu")||"{}");
+    LOG=JSON.parse(localStorage.getItem("hc3-log")||"{}");
+    LOGP=JSON.parse(localStorage.getItem("hc3-logp")||"{}");
+    HARD=JSON.parse(localStorage.getItem("hc3-hard")||"{}");
+    MOVED=JSON.parse(localStorage.getItem("hc3-moved")||"{}");
+    GOAL=Object.assign(GOAL,JSON.parse(localStorage.getItem("hc-goal")||"{}"));
+    REC=JSON.parse(localStorage.getItem("hc-rec")||"{}");
+    BON=JSON.parse(localStorage.getItem("hc3-bonus")||"{}");
+    MH=JSON.parse(localStorage.getItem("hc-maxhist")||"[]");
+  }catch(e){}
+  if(!DAYS[S.d])S.d="mer";
+}
+function save(){
+  try{
+    localStorage.setItem("hc3-view",JSON.stringify(S));
+    localStorage.setItem("hc-max",JSON.stringify(M));
+    localStorage.setItem("hc3-ov",JSON.stringify(OV));
+    localStorage.setItem("hc3-done",JSON.stringify(DONE));
+    localStorage.setItem("hc3-wu",JSON.stringify(WD));
+    localStorage.setItem("hc3-log",JSON.stringify(LOG));
+    localStorage.setItem("hc3-logp",JSON.stringify(LOGP));
+    localStorage.setItem("hc3-hard",JSON.stringify(HARD));
+    localStorage.setItem("hc3-moved",JSON.stringify(MOVED));
+    localStorage.setItem("hc-goal",JSON.stringify(GOAL));
+    localStorage.setItem("hc-rec",JSON.stringify(REC));
+    localStorage.setItem("hc3-bonus",JSON.stringify(BON));
+    localStorage.setItem("hc-maxhist",JSON.stringify(MH));
+    if(!BOOT)localStorage.setItem("hc-ts",String(Date.now()));
+  }catch(e){}
+  if(!BOOT)scheduleCloud();
+}
+/* ---- sauvegarde dans le compte Claude (privée, suit d'un appareil à l'autre) ---- */
+let CLOUD=null,cloudTimer=null,cloudBusy=false,cloudAgain=false,BOOT=true;
+function packState(){return{v:1,ts:Date.now(),S,M,OV,DONE,WD,LOG,LOGP,HARD,MH,MOVED,BON,GOAL,REC};}
+function applyState(d){
+  if(!d)return;
+  d=JSON.parse(JSON.stringify(d)); /* les données du compte arrivent verrouillées : on travaille sur une copie */
+  if(d.S)S=Object.assign(S,d.S);
+  if(d.M)M=Object.assign(M,d.M);
+  OV=d.OV||{};DONE=d.DONE||{};WD=d.WD||{};LOG=d.LOG||{};LOGP=d.LOGP||{};HARD=d.HARD||{};MH=d.MH||[];
+  MOVED=d.MOVED||{};BON=d.BON||{};REC=d.REC||{};
+  if(d.GOAL)GOAL=Object.assign(GOAL,d.GOAL);
+}
+function setSync(ok,txt){const el=document.getElementById("syncStatus");if(!el)return;el.textContent=txt;el.classList.toggle("ok",ok);}
+function scheduleCloud(){
+  if(!CLOUD)return;
+  clearTimeout(cloudTimer);cloudTimer=setTimeout(pushCloud,800);
+}
+async function pushCloud(){
+  if(!CLOUD)return;
+  if(cloudBusy){cloudAgain=true;return;}
+  cloudBusy=true;
+  try{await CLOUD.set(packState());setSync(true,"Sauvegardé dans ton compte ✓");}
+  catch(e){setSync(false,"Sauvegarde : ce navigateur (compte indisponible)");}
+  cloudBusy=false;
+  if(cloudAgain){cloudAgain=false;pushCloud();}
+}
+async function initCloud(){
+  try{
+    if(!window.claude||typeof claude.use!=="function")return;
+    const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+    if(!db||!user)return;
+    const id=await user.id();if(!id)return;
+    const ref=db.doc("data/users/"+id+"/programme");
+    const snap=await ref.get();
+    let localTs=0;try{localTs=parseInt(localStorage.getItem("hc-ts")||"0",10)||0;}catch(e){}
+    const d=snap.exists?snap.data():null;
+    CLOUD=ref;
+    if(d&&(d.ts||0)>=localTs){
+      applyState(d);
+      try{localStorage.setItem("hc-ts",String(d.ts||Date.now()));}catch(e){}
+      bindMax();render();initTabs();
+      setSync(true,"Sauvegardé dans ton compte ✓");
+    }else{
+      await pushCloud();
+    }
+  }catch(e){CLOUD=null;setSync(false,"Sauvegarde : ce navigateur");}
+  finally{BOOT=false;}
+}
+const fmt=x=>(Math.round(x*10)/10).toString().replace(".",",");
+const pre=()=>S.b+"-"+S.w+"-"+S.d+"-";
+function pctLoad(it,w){
+  if(w===undefined)w=S.w;
+  if(!it.p||!it.p[w])return null;
+  const r=parseFloat(M.round)||1;
+  return Math.round(M[EX[it.e].b]*it.p[w]/100/r)*r;
+}
+
+/* =============== RENDU =============== */
+function nav(){
+  const bl=BLOCKS[S.b];
+  const bEl=document.getElementById("blocks");bEl.innerHTML="";
+  BLOCKS.forEach((b,i)=>{
+    const x=document.createElement("button");
+    x.innerHTML="<b>"+b.id+"</b><span>"+b.name+"</span>";
+    if(i===S.b)x.className="on";
+    x.onclick=()=>{S.b=i;save();render();};
+    bEl.appendChild(x);
+  });
+  const wEl=document.getElementById("weeks");wEl.innerHTML="";
+  ["S1","S2","S3","S4"].forEach((w,i)=>{
+    const x=document.createElement("button");
+    x.textContent=i===3?(bl.test?"S4 test":"S4 déload"):w;
+    if(i===S.w)x.className="on";
+    x.onclick=()=>{S.w=i;save();render();};
+    wEl.appendChild(x);
+  });
+  const dEl=document.getElementById("days");dEl.innerHTML="";
+  Object.keys(DAYS).forEach(k=>{
+    const D=DAYS[k],x=document.createElement("button");
+    x.innerHTML=D.s+"<small>"+(D.type==="h"?"Haltéro":D.type==="c"?"Grimpe":"Mobil.")+"</small>";
+    const mv=["mer","ven","sam"].some(d=>{const t=MOVED[S.b+"-"+S.w+"-"+d];return t&&t!==d&&(d===k||t===k);});
+    x.className=D.type+(k===S.d?" on":"")+(mv?" moved":"");
+    x.onclick=()=>{S.d=k;save();render();};
+    dEl.appendChild(x);
+  });
+}
+function intro(){
+  const bl=BLOCKS[S.b],D=DAYS[S.d];
+  let html;
+  if(D.type==="m"){
+    html='<div class="note m"><b>'+D.f+' — '+MOB.t+'</b>'+MOB.goal+' Tu peux aussi la faire un soir de semaine en plus.</div>'+movedHere();
+  }else if(D.type==="c"){
+    const c=CLIMB[S.d];
+    const extra=S.w===3?" <i>Semaine allégée : moins de volume, pas d'essais maximaux.</i>":"";
+    html='<div class="note c"><b>'+D.f+' — '+c.t+'</b>'+c.goal+extra+'</div>'+movedHere();
+  }else{
+    const day=bl.days[S.d];
+    let title=day.t;
+    if(bl.test&&S.w===3&&day.testT)title=day.testT;
+    let extra="";
+    if(S.w===3&&!bl.test)extra=" <i>Déload : mêmes exercices, moins de séries, charges allégées.</i>";
+    if(S.w===3&&bl.test&&S.d!=="sam")extra=" <i>Semaine de test : séance courte, rien de difficile.</i>";
+    if(S.w===3&&bl.test&&S.d==="sam")extra=" <i>Pas de renfo aujourd'hui.</i>";
+    html='<div class="note"><b>'+bl.id+' · '+D.f+' — '+title+'</b>'+bl.goal+' Cible : '+bl.rpe+'.'+extra+'</div>'+moveBox()+movedHere();
+  }
+  document.getElementById("intro").innerHTML=html;
+  const ms=document.getElementById("moveSel");
+  if(ms)ms.onchange=()=>{const k=S.b+"-"+S.w+"-"+S.d;if(ms.value===S.d){delete MOVED[k];delete BON[k];}else MOVED[k]=ms.value;save();nav();intro();session();};
+  const bc=document.getElementById("bonusChk");
+  if(bc)bc.onchange=()=>{const k=S.b+"-"+S.w+"-"+S.d;if(bc.checked)BON[k]=1;else delete BON[k];save();session();};
+  document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{S.d=b.dataset.goto;save();render();});
+}
+/* ---- séance allongée (uniquement pour une séance reportée) ----
+   +1 série sur les mouvements principaux, +1 série sur les exercices "plus", et un petit bloc en plus */
+const BONUS = {
+  mer:{plus:["back45"],ex:[
+    {e:"hc",kx:"-b",s:[3,3,3,2],r:"× 3",p:[55,55,58,52]}]},
+  ven:{plus:["rdl"],ex:[
+    {e:"hc",kx:"-b",s:[3,3,3,2],r:"× 3",p:[55,55,58,52]},
+    {e:"back45",kx:"-b",s:[3,3,3,2],r:"× 12",k:[10,10,15,5],u:"kg (disque)"}]},
+  sam:{plus:["hipthrust"],ex:[
+    {e:"hs",kx:"-b",s:[3,3,3,2],r:"× 3",p:[55,55,58,52]},
+    {e:"back45",kx:"-b",s:[3,3,3,2],r:"× 12",k:[10,10,15,5],u:"kg (disque)"}]}
+};
+/* ---- progression automatique d'après les séances réalisées ----
+   Haltéro (charges en %) : on compare la charge faite à la charge prévue sur les 3 dernières séances
+   du même mouvement de référence (arraché, épaulé-jeté, back squat, front squat). Séries toutes
+   validées = +2 %, séance incomplète = −3 %. Le facteur obtenu (entre −15 % et +5 %) s'applique aux
+   séances suivantes.
+   Renfo / mobilité (charges fixes) : on repart de la dernière charge faite ; toutes les séries
+   validées → on ajoute l'incrément ; séance incomplète → même charge ; semaine 4 → −10 %. */
+const DAYORD=["lun","mar","mer","jeu","ven","sam","dim"];
+function posOf(b,w,d){return (b*4+w)*7+DAYORD.indexOf(d);}
+const INC={bss:1,slrdl:1,ohp:2.5,bench:2.5,rdl:2.5,hipthrust:5,back45:2.5,er:0.5,wrist:0.5,
+  kneewall:2,cossackg:2,soleus:2.5,gobletp:2,ankrock:2};
+function findItem(b,w,d,e){
+  const lists=[];
+  if(BLOCKS[b]&&BLOCKS[b].days[d])lists.push(BLOCKS[b].days[d].ex);
+  if(RENFO[d])lists.push(RENFO[d]);
+  if(MOBS[d])lists.push(MOBS[d]);
+  for(const l of lists){const it=l.find(x=>x.e===e&&!x.kx);if(it)return it;}
+  return null;
+}
+function parsedLogs(){
+  return Object.keys(LOG).map(k=>{
+    const parts=k.split("-");const b=+parts[0],w=+parts[1],d=parts[2],e=parts.slice(3).join("-");
+    return{k,b,w,d,e,v:LOG[k],pos:posOf(b,w,d)};
+  }).filter(x=>EX[x.e]&&DAYORD.includes(x.d)&&!isNaN(x.v));
+}
+function complete(x,it){const n=it.s[x.w]||0;return n>0&&(DONE[x.k]||[]).length>=n;}
+function famAdj(lift,pos,e){
+  if(!lift)return null;
+  const all=parsedLogs().filter(x=>x.pos<pos&&EX[x.e].b===lift&&!x.e.startsWith("test"));
+  /* d'abord le même exercice ; sinon les mouvements principaux du même mouvement de référence */
+  let L=all.filter(x=>x.e===e);
+  if(!L.length)L=all.filter(x=>{const it=findItem(x.b,x.w,x.d,x.e);return it&&it.m;});
+  L=L.sort((a,b)=>b.pos-a.pos).slice(0,3);
+  const rs=[];
+  L.forEach(x=>{
+    const it=findItem(x.b,x.w,x.d,x.e);if(!it||!it.p)return;
+    const planned=LOGP[x.k]!==undefined?LOGP[x.k]:pctLoad(it,x.w);
+    if(!planned)return;
+    let r=x.v/planned;
+    if(!complete(x,it))r=Math.min(r,1)-0.03;      /* séance incomplète : jamais de hausse */
+    else if(HARD[x.k])r=Math.min(r,1)-0.01;       /* séance validée mais dure : pas de hausse */
+    else r+=0.02;
+    rs.push(r);
+  });
+  if(!rs.length)return null;
+  let adj=rs.reduce((a,b)=>a+b,0)/rs.length;
+  adj=Math.max(0.85,Math.min(1.05,adj));
+  return{adj,n:rs.length};
+}
+function kAdj(e,pos,w){
+  const L=parsedLogs().filter(x=>x.e===e&&x.pos<pos).sort((a,b)=>b.pos-a.pos);
+  if(!L.length)return null;
+  const x=L[0],it=findItem(x.b,x.w,x.d,x.e);if(!it||!it.k)return null;
+  const inc=INC[e]||2.5,step=inc<1?0.5:inc<2?1:inc<2.5?2:2.5;
+  const rnd=v=>Math.round(v/step)*step;
+  if(w===3)return{val:rnd(x.v*0.9),from:x.v,note:"semaine allégée"};
+  if(complete(x,it)&&HARD[x.k])return{val:x.v,from:x.v,note:"même charge (c'était dur)"};
+  if(complete(x,it))return{val:x.v+inc,from:x.v,note:"+"+fmt(inc)+" (toutes les séries validées)"};
+  return{val:x.v,from:x.v,note:"même charge (séance incomplète)"};
+}
+/* ---- report de séance ---- */
+const ORDER=["lun","mar","mer","jeu","ven","sam","dim"];
+function moveBox(){
+  const k=S.b+"-"+S.w+"-"+S.d,cur=MOVED[k]||S.d,start=ORDER.indexOf(S.d);
+  const opts=ORDER.slice(start).map(d=>'<option value="'+d+'"'+(d===cur?" selected":"")+'>'+(d===S.d?"le jour prévu ("+DAYS[d].f.toLowerCase()+")":DAYS[d].f.toLowerCase())+'</option>').join("");
+  let msg="";
+  if(cur!==S.d){
+    const T=DAYS[cur];
+    msg='<p class="mv-msg">Séance reportée au '+T.f.toLowerCase()+'. Mêmes charges que prévu : on ne charge jamais plus lourd pour compenser.'+
+      (T.type==="c"?' La grimpe du '+T.f.toLowerCase()+' saute cette semaine.':'')+
+      (T.type==="m"?' Garde quand même la routine hanches, en version légère.':'')+
+      ' Les séries cochées ici restent enregistrées sur la bonne semaine.</p>';
+  }
+  let bon="";
+  if(cur!==S.d&&!(BLOCKS[S.b].test&&S.w===3)){
+    const nextRest=cur==="dim";
+    bon='<label class="mv-bon"><input type="checkbox" id="bonusChk"'+(BON[k]?" checked":"")+'><span>Allonger la séance : +1 série sur les mouvements principaux, et un bloc technique + renfo chaîne postérieure en plus</span></label>'+
+      '<p class="mv-hint">'+(nextRest?"Conseillé : demain lundi est ton jour sans charge.":"Plutôt à éviter : le lendemain n'est pas un jour sans charge.")+
+      ' Mêmes charges, jamais plus lourd. Arrête dès que la technique se dégrade, et vise 1 h 45 maximum.</p>';
+  }
+  return '<div class="mv"><label>Séance faite <select id="moveSel">'+opts+'</select></label>'+msg+bon+'</div>';
+}
+function movedHere(){
+  let out="";
+  ["mer","ven","sam"].forEach(d=>{
+    if(MOVED[S.b+"-"+S.w+"-"+d]!==S.d||d===S.d)return;
+    const D=DAYS[S.d];
+    let txt;
+    if(D.type==="c")txt="La séance d'haltéro du "+DAYS[d].f.toLowerCase()+" a été reportée à aujourd'hui : <b>pas de grimpe aujourd'hui</b>, sauter cette séance ne coûte presque rien."+(S.d==="dim"?" Mardi, à la séance de force, fais 3 ou 4 suspensions au lieu de 5 et moins de blocs à la limite si tu sens encore la séance.":"");
+    else if(D.type==="m")txt="La séance d'haltéro du "+DAYS[d].f.toLowerCase()+" a été reportée à aujourd'hui. Garde la routine hanches en version légère, après ou le soir.";
+    else txt="La séance d'haltéro du "+DAYS[d].f.toLowerCase()+" a aussi été reportée à aujourd'hui : fais-en une seule, la plus importante, et saute l'autre.";
+    out+='<div class="mv mv-in"><p>'+txt+'</p><button class="linkbtn" data-goto="'+d+'">Ouvrir la séance du '+DAYS[d].f.toLowerCase()+' →</button></div>';
+  });
+  return out;
+}
+function wuCount(){
+  let tot=0,ok=0;
+  WU_DAY[S.d].forEach(gk=>WU[gk].it.forEach((_,i)=>{tot++;if(WD[pre()+gk+"-"+i])ok++;}));
+  document.getElementById("wuCount").textContent=ok+" / "+tot;
+}
+function warmup(){
+  const box=document.getElementById("wuBox");
+  box.hidden=!WU_DAY[S.d].length;
+  box.open=!!S.wuOpen;
+  const el=document.getElementById("warmup");el.innerHTML="";
+  WU_DAY[S.d].forEach(gk=>{
+    const g=WU[gk];
+    const grp=document.createElement("div");grp.className="wu-g";
+    grp.innerHTML="<h4>"+g.t+"</h4>";
+    g.it.forEach((it,i)=>{
+      const key=pre()+gk+"-"+i;
+      const lab=document.createElement("label");
+      lab.className="wu-i"+(WD[key]?" ok":"");
+      lab.innerHTML='<input type="checkbox"'+(WD[key]?" checked":"")+'><span class="wu-t"><b>'+it.n+'</b> · <span class="dose">'+it.d+'</span><small>'+it.w+'</small></span>';
+      lab.querySelector("input").onchange=e=>{
+        if(e.target.checked)WD[key]=1;else delete WD[key];
+        save();lab.classList.toggle("ok",!!WD[key]);wuCount();
+      };
+      grp.appendChild(lab);
+    });
+    el.appendChild(grp);
+  });
+  wuCount();
+}
+function card(it,kind){
+  let n=it.s[S.w];if(!n)return null;
+  let extraSet=false;
+  if(BONUSON&&it.r!=="max"&&((kind==="h"&&it.m)||(kind==="renfo"&&BONUS[S.d]&&BONUS[S.d].plus.includes(it.e)))){n+=1;extraSet=true;}
+  const ex=EX[it.e],key=pre()+it.e+(it.kx||""),got=DONE[key]||[];
+  const el=document.createElement("div");
+  el.className="ex"+(it.r!=="max"&&got.length>=n?" complete":"");
+  let base=null,unit="kg",pctTxt="";
+  if(it.p){base=pctLoad(it);if(base!==null)pctTxt=it.e.startsWith("test")?"max actuel : "+fmt(M[ex.b])+" kg":it.p[S.w]+" % "+BASE[ex.b];}
+  else if(it.k){base=it.k[S.w];unit=it.u||"kg";pctTxt="charge proposée";}
+  const orig=base;
+  if(base!==null&&!it.e.startsWith("test")){
+    const pos=posOf(S.b,S.w,S.d);
+    if(it.p){
+      const a=famAdj(ex.b,pos,it.e);
+      if(a&&Math.abs(a.adj-1)>=0.01){
+        const r=parseFloat(M.round)||1;
+        base=Math.round(base*a.adj/r)*r;
+        pctTxt+=" · ajusté "+(a.adj>1?"+":"−")+Math.abs(Math.round((a.adj-1)*100))+" % d'après tes séances";
+      }
+    }else if(it.k&&kind!=="esc"){
+      const a=kAdj(it.e,pos,S.w);
+      if(a){base=a.val;pctTxt="d'après ta dernière séance ("+fmt(a.from)+")"+(a.note?" · "+a.note:"");}
+    }
+  }
+  let loadHTML="",pctHTML="";
+  if(base===null){
+    if(kind!=="esc"&&kind!=="mob")loadHTML='<span class="fixed">poids du corps</span>';
+  }else{
+    const has=OV[key]!==undefined,v=has?OV[key]:base;
+    loadHTML='<div class="loadbox"><input type="number" inputmode="decimal" step="0.5" value="'+v+'"'+(has?' class="edited"':'')+' data-k="'+key+'" data-b="'+base+'"><span class="u">'+unit+'</span>'+
+      (has?'<button class="rst" data-r="'+key+'" title="Revenir à la valeur proposée">↺</button>':'')+'</div>';
+    pctHTML='<div class="pct">'+pctTxt+(has?" · proposé : "+fmt(base):"")+'</div>';
+  }
+  const tagTxt=(kind==="bonus"?"Bonus":kind==="renfo"?"Renfo":kind==="esc"?"Escalade":kind==="mob"?"Mobilité":(it.m?"Mouvement principal":"Complément"))+(it.e.startsWith("cx_")?" · complexe":"")+(extraSet?" · +1 série":"");
+  const tagCls=kind==="bonus"?"main":kind==="renfo"?"renfo":kind==="esc"?"esc":kind==="mob"?"mob":(it.m?"main":"");
+  const scheme=it.r==="max"?"Montée jusqu'au max":n+" "+it.r;
+  el.innerHTML=
+    '<span class="tag '+tagCls+'">'+tagTxt+'</span><h3>'+ex.n+'</h3>'+
+    '<div class="row"><span class="scheme">'+scheme+'</span>'+loadHTML+'</div>'+pctHTML+
+    '<details class="how"><summary>Comment faire</summary><p>'+ex.d+'</p>'+(ex.w?'<p style="color:var(--lav)">'+ex.w+'</p>':'')+
+    '<ul>'+ex.c.map(x=>"<li>"+x+"</li>").join("")+'</ul></details>';
+  if(it.r!=="max"){
+    const sets=document.createElement("div");sets.className="sets";
+    for(let s=0;s<n;s++){
+      const x=document.createElement("button");
+      x.textContent=s+1;
+      if(got.includes(s))x.className="ok";
+      x.onclick=()=>{
+        const a=DONE[key]||[],j=a.indexOf(s);
+        if(j>=0)a.splice(j,1);else a.push(s);
+        DONE[key]=a;
+        if(base!==null){
+          if(a.length){if(LOG[key]===undefined){LOG[key]=OV[key]!==undefined?OV[key]:base;LOGP[key]=orig;}}
+          else{delete LOG[key];delete LOGP[key];}
+        }
+        save();session();
+      };
+      sets.appendChild(x);
+    }
+    if(base!==null&&kind!=="esc"){
+      const h=document.createElement("button");
+      h.className="hard"+(HARD[key]?" on":"");
+      h.textContent=HARD[key]?"C'était dur ✓":"C'était dur ?";
+      h.title="À cocher si la charge était à la limite : la séance suivante ne montera pas";
+      h.onclick=()=>{if(HARD[key])delete HARD[key];else HARD[key]=1;save();session();};
+      sets.appendChild(h);
+    }
+    el.appendChild(sets);
+  }
+  return el;
+}
+function addSection(list,title,items,kind){
+  const cards=items.map(it=>card(it,kind)).filter(Boolean);
+  if(!cards.length)return;
+  const h=document.createElement("div");h.className="sec";h.textContent=title;
+  list.appendChild(h);
+  cards.forEach(c=>list.appendChild(c));
+}
+function session(){
+  BONUSON=false;
+  const list=document.getElementById("list");list.innerHTML="";
+  if(DAYS[S.d].type==="m"){
+    addSection(list,"Routine mobilité",MOB.ex,"mob");
+  }else if(DAYS[S.d].type==="c"){
+    addSection(list,"Séance d'escalade",CLIMB[S.d].ex,"esc");
+  }else{
+    const bl=BLOCKS[S.b];
+    const k=S.b+"-"+S.w+"-"+S.d;
+    BONUSON=!!(BON[k]&&MOVED[k]&&MOVED[k]!==S.d&&!(bl.test&&S.w===3));
+    addSection(list,"Haltérophilie",bl.days[S.d].ex,"h");
+    addSection(list,"Mobilité · entre les séries",MOBS[S.d],"mob");
+    if(!(bl.test&&S.w===3&&S.d==="sam"))addSection(list,"Renforcement",RENFO[S.d],"renfo");
+    if(BONUSON)addSection(list,"Bonus · séance allongée",BONUS[S.d].ex,"bonus");
+  }
+  list.querySelectorAll("input[data-k]").forEach(inp=>{
+    inp.onchange=()=>{
+      const v=parseFloat(String(inp.value).replace(",","."));
+      const k=inp.dataset.k;
+      if(!isNaN(v))OV[k]=v;else delete OV[k];
+      if(DONE[k]&&DONE[k].length)LOG[k]=OV[k]!==undefined?OV[k]:parseFloat(inp.dataset.b);
+      save();session();
+    };
+  });
+  list.querySelectorAll("button[data-r]").forEach(b=>{
+    b.onclick=()=>{
+      const k=b.dataset.r,i=document.querySelector('input[data-k="'+k+'"]');
+      delete OV[k];
+      if(DONE[k]&&DONE[k].length&&i)LOG[k]=parseFloat(i.dataset.b);
+      save();session();
+    };
+  });
+}
+function render(){nav();intro();warmup();session();}
+
+/* =============== RÉGLAGES =============== */
+function bindMax(){
+  ["sn","cj","bs","fs","bar"].forEach(k=>{
+    const el=document.getElementById("m_"+k);
+    el.value=M[k];
+    el.onchange=()=>{const v=parseFloat(el.value);if(!isNaN(v)&&v>0){M[k]=v;if(k==="sn"||k==="cj")logMax();save();render();}};
+  });
+  const r=document.getElementById("m_round");
+  r.value=String(M.round);
+  r.onchange=()=>{M.round=parseFloat(r.value);save();render();};
+}
+document.getElementById("wuBox").addEventListener("toggle",e=>{S.wuOpen=e.target.open;save();});
+document.getElementById("resetSets").onclick=()=>{
+  const p=pre();
+  Object.keys(DONE).forEach(k=>{if(k.startsWith(p))delete DONE[k];});
+  Object.keys(WD).forEach(k=>{if(k.startsWith(p))delete WD[k];});
+  Object.keys(LOG).forEach(k=>{if(k.startsWith(p))delete LOG[k];});
+  Object.keys(LOGP).forEach(k=>{if(k.startsWith(p))delete LOGP[k];});
+  Object.keys(HARD).forEach(k=>{if(k.startsWith(p))delete HARD[k];});
+  save();render();
+};
+document.getElementById("resetLoads").onclick=()=>{
+  const p=pre();
+  Object.keys(OV).forEach(k=>{if(k.startsWith(p))delete OV[k];});
+  save();render();
+};
+/* =============== SUIVI =============== */
+const C_PLAN="#8a7d9e",C_DONE="#9a7ad8",C_SN="#9a7ad8",C_CJ="#33a883",SURF="#211a2b";
+const WEEKS=[];BLOCKS.forEach((b,bi)=>[0,1,2,3].forEach(w=>WEEKS.push({b:bi,w,l:b.id+" · S"+(w+1)})));
+
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function logMax(){
+  const t=todayISO(),last=MH[MH.length-1];
+  if(last&&last.d===t){last.sn=M.sn;last.cj=M.cj;}
+  else if(!last||last.sn!==M.sn||last.cj!==M.cj)MH.push({d:t,sn:M.sn,cj:M.cj});
+}
+/* tous les endroits où un exercice apparaît pour (bloc, semaine) */
+function occurrences(e,b,w){
+  const out=[],bl=BLOCKS[b];
+  ["mer","ven","sam"].forEach(d=>{
+    bl.days[d].ex.forEach(it=>{if(it.e===e&&it.s[w])out.push({it,d});});
+    if(!(bl.test&&w===3&&d==="sam"))RENFO[d].forEach(it=>{if(it.e===e&&it.s[w])out.push({it,d});});
+    MOBS[d].forEach(it=>{if(it.e===e&&it.s[w])out.push({it,d});});
+  });
+  Object.keys(CLIMB).forEach(d=>CLIMB[d].ex.forEach(it=>{if(it.e===e&&it.s[w])out.push({it,d});}));
+  return out;
+}
+function plannedFor(e,b,w){
+  let best=null;
+  occurrences(e,b,w).forEach(({it})=>{
+    const v=it.p?pctLoad(it,w):it.k?it.k[w]:null;
+    if(v!==null&&v!==undefined&&(best===null||v>best))best=v;
+  });
+  return best;
+}
+function doneFor(e,b,w){
+  let best=null;
+  Object.keys(DAYS).forEach(d=>{
+    const v=LOG[b+"-"+w+"-"+d+"-"+e];
+    if(v!==undefined&&(best===null||v>best))best=v;
+  });
+  return best;
+}
+function exerciseList(){
+  const seen=new Set(),groups={h:[],r:[],m:[],c:[]};
+  const add=(it,g)=>{
+    if(seen.has(it.e)||it.e.startsWith("test")||it.e==="cj_l")return;
+    if(!((it.p&&it.p.some(x=>x))||it.k))return;
+    seen.add(it.e);groups[g].push(it.e);
+  };
+  BLOCKS.forEach(b=>["mer","ven","sam"].forEach(d=>b.days[d].ex.forEach(it=>add(it,"h"))));
+  ["mer","ven","sam"].forEach(d=>RENFO[d].forEach(it=>add(it,"r")));
+  ["mer","ven","sam"].forEach(d=>MOBS[d].forEach(it=>add(it,"m")));
+  Object.keys(CLIMB).forEach(d=>CLIMB[d].ex.forEach(it=>add(it,"c")));
+  return groups;
+}
+function unitOf(e){
+  let u="kg";
+  ["mer","ven","sam"].forEach(d=>RENFO[d].forEach(it=>{if(it.e===e&&it.u)u=it.u;}));
+  ["mer","ven","sam"].forEach(d=>MOBS[d].forEach(it=>{if(it.e===e&&it.u)u=it.u;}));
+  Object.keys(CLIMB).forEach(d=>CLIMB[d].ex.forEach(it=>{if(it.e===e&&it.u)u=it.u;}));
+  return u;
+}
+
+/* ---- graphique en lignes (SVG) ---- */
+function niceRange(vals){
+  const v=vals.filter(x=>x!==null&&x!==undefined);
+  if(!v.length)return[0,10,5];
+  let lo=Math.min(...v),hi=Math.max(...v);
+  if(lo===hi){lo-=2;hi+=2;}
+  const span=hi-lo,step=span>60?20:span>24?10:span>8?5:span>3?2:1;
+  lo=Math.floor((lo-step*0.4)/step)*step;hi=Math.ceil((hi+step*0.4)/step)*step;
+  if(lo<0)lo=0;
+  return[lo,hi,step];
+}
+function lineChart(el,labels,series,opt){
+  const W=Math.max(280,Math.round(el.clientWidth||600)),H=opt.h||250,ml=34,mr=14,mt=16,mb=opt.groups?44:28;
+  const n=labels.length,pw=W-ml-mr,ph=H-mt-mb;
+  const all=[];series.forEach(s=>all.push(...s.vals));
+  (opt.refs||[]).forEach(r=>all.push(r.v));
+  const [lo,hi,step]=niceRange(all);
+  const x=i=>ml+(n===1?pw/2:pw*i/(n-1));
+  const y=v=>mt+ph-(v-lo)/(hi-lo)*ph;
+  let g="";
+  for(let v=lo;v<=hi+1e-9;v+=step){
+    const yy=y(v);
+    g+='<line class="grid" x1="'+ml+'" x2="'+(W-mr)+'" y1="'+yy+'" y2="'+yy+'"/>';
+    g+='<text class="axis" x="'+(ml-8)+'" y="'+(yy+4)+'" text-anchor="end">'+fmt(v)+'</text>';
+  }
+  if(opt.groups){
+    opt.groups.forEach((gr,gi)=>{
+      const x0=x(gr.from),x1=x(gr.to);
+      if(gi>0)g+='<line class="grid" x1="'+(x0-pw/(n-1)/2)+'" x2="'+(x0-pw/(n-1)/2)+'" y1="'+mt+'" y2="'+(mt+ph)+'" stroke-dasharray="2 4"/>';
+      g+='<text class="blk" x="'+((x0+x1)/2)+'" y="'+(H-8)+'" text-anchor="middle">'+gr.l+'</text>';
+    });
+    labels.forEach((l,i)=>{g+='<text class="axis" x="'+x(i)+'" y="'+(mt+ph+16)+'" text-anchor="middle">'+l.short+'</text>';});
+  }else{
+    labels.forEach((l,i)=>{g+='<text class="axis" x="'+x(i)+'" y="'+(mt+ph+18)+'" text-anchor="middle">'+l.short+'</text>';});
+  }
+  series.forEach(s=>{
+    let d="",pen=false;
+    s.vals.forEach((v,i)=>{
+      if(v===null||v===undefined){pen=false;return;}
+      d+=(pen?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1);pen=true;
+    });
+    if(d)g+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="'+(s.dash?2:2.5)+'" stroke-linejoin="round" stroke-linecap="round"'+(s.dash?' stroke-dasharray="6 5"':'')+'/>';
+    if(s.dots)s.vals.forEach((v,i)=>{
+      if(v===null||v===undefined)return;
+      g+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="4.5" fill="'+s.color+'" stroke="'+SURF+'" stroke-width="2"/>';
+    });
+    if(s.label){
+      let li=-1;s.vals.forEach((v,i)=>{if(v!==null&&v!==undefined)li=i;});
+      if(li>=0){
+        const anchor=x(li)>W-70?"end":"start",dx=anchor==="end"?-8:8;
+        g+='<text class="lbl" x="'+(x(li)+dx)+'" y="'+(y(s.vals[li])-9)+'" text-anchor="'+anchor+'">'+fmt(s.vals[li])+'</text>';
+      }
+    }
+  });
+  (opt.refs||[]).forEach(r=>{
+    const yy=y(r.v);
+    g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+yy+'" y2="'+yy+'" stroke="'+r.color+'" stroke-width="1.5" stroke-dasharray="3 5" opacity=".8"/>';
+    g+='<text class="axis" x="'+(ml+4)+'" y="'+(yy-5)+'" style="fill:'+r.color+'">'+r.label+'</text>';
+  });
+  g+='<line class="xh" x1="0" x2="0" y1="'+mt+'" y2="'+(mt+ph)+'"/>';
+  const cw=n===1?pw:pw/(n-1);
+  labels.forEach((l,i)=>{g+='<rect class="hit" data-i="'+i+'" x="'+(x(i)-cw/2)+'" y="'+mt+'" width="'+cw+'" height="'+ph+'"/>';});
+  el.innerHTML='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(opt.aria||"")+'">'+g+'</svg>';
+  const tip=document.getElementById("tipbox"),xh=el.querySelector(".xh");
+  el.querySelectorAll(".hit").forEach(r=>{
+    const show=ev=>{
+      const i=+r.dataset.i,xx=x(i);
+      xh.setAttribute("x1",xx);xh.setAttribute("x2",xx);xh.style.opacity=.6;
+      tip.innerHTML="<b>"+labels[i].long+"</b>"+series.map(s=>{
+        const v=s.vals[i];
+        return '<div><i style="background:'+s.color+'"></i>'+s.name+" : "+(v===null||v===undefined?"—":fmt(v)+" "+opt.unit)+"</div>";
+      }).join("");
+      const p=ev.touches?ev.touches[0]:ev;
+      tip.style.opacity=1;
+      const tw=tip.offsetWidth,th=tip.offsetHeight;
+      let lx=p.clientX+14,ly=p.clientY-th-12;
+      if(lx+tw>window.innerWidth-8)lx=p.clientX-tw-14;
+      if(ly<8)ly=p.clientY+16;
+      tip.style.left=lx+"px";tip.style.top=ly+"px";
+    };
+    r.addEventListener("mousemove",show);
+    r.addEventListener("touchstart",show,{passive:true});
+    r.addEventListener("mouseleave",()=>{tip.style.opacity=0;xh.style.opacity=0;});
+  });
+}
+
+function renderSuivi(){
+  const sel=document.getElementById("exPick");
+  if(!sel.options.length){
+    const gr=exerciseList(),names={h:"Haltérophilie",r:"Renforcement",m:"Mobilité",c:"Escalade"};
+    Object.keys(gr).forEach(k=>{
+      if(!gr[k].length)return;
+      const og=document.createElement("optgroup");og.label=names[k];
+      gr[k].forEach(e=>{const o=document.createElement("option");o.value=e;o.textContent=EX[e].n;og.appendChild(o);});
+      sel.appendChild(og);
+    });
+    sel.onchange=()=>{S.ex=sel.value;save();renderSuivi();};
+  }
+  if(!EX[S.ex]||![...sel.options].some(o=>o.value===S.ex))S.ex=sel.options[0].value;
+  sel.value=S.ex;
+  const e=S.ex,unit=unitOf(e);
+  const plan=WEEKS.map(W=>plannedFor(e,W.b,W.w));
+  const done=WEEKS.map(W=>doneFor(e,W.b,W.w));
+  document.getElementById("chartTtl").textContent=EX[e].n+" — charge la plus lourde de la semaine ("+unit+")";
+  const labels=WEEKS.map(W=>({short:"S"+(W.w+1),long:W.l}));
+  const groups=BLOCKS.map((b,i)=>({l:b.id,from:i*4,to:i*4+3}));
+  lineChart(document.getElementById("chartLoad"),labels,[
+    {name:"Prévu",color:C_PLAN,vals:plan,dash:true},
+    {name:"Réalisé",color:C_DONE,vals:done,dots:true,label:true}
+  ],{unit,groups,aria:"Charges prévues et réalisées pour "+EX[e].n});
+  const nDone=done.filter(v=>v!==null).length;
+  const lastI=done.map((v,i)=>v!==null?i:-1).filter(i=>i>=0).pop();
+  let note;
+  if(!nDone)note="Rien d'enregistré pour l'instant : coche une série de cet exercice pour que la charge apparaisse ici.";
+  else{
+    const dv=done[lastI],pv=plan[lastI];
+    note=nDone+" semaine"+(nDone>1?"s":"")+" enregistrée"+(nDone>1?"s":"")+". Dernière : "+WEEKS[lastI].l+", "+fmt(dv)+" "+unit+
+      (pv!==null?" ("+(dv>=pv?"+":"")+fmt(dv-pv)+" par rapport au prévu)":"")+".";
+  }
+  document.getElementById("loadNote").textContent=note;
+  document.getElementById("tblLoad").innerHTML='<table class="d"><tr><th>Semaine</th><th>Prévu</th><th>Réalisé</th></tr>'+
+    WEEKS.map((W,i)=>plan[i]===null&&done[i]===null?"":'<tr><td>'+W.l+'</td><td>'+(plan[i]===null?"—":fmt(plan[i]))+'</td><td>'+(done[i]===null?"—":fmt(done[i]))+'</td></tr>').join("")+'</table>';
+
+  /* maxes */
+  const ml=MH.map(m=>{const p=m.d.split("-");return{short:p[2]+"/"+p[1],long:p[2]+"/"+p[1]+"/"+p[0]};});
+  lineChart(document.getElementById("chartMax"),ml,[
+    {name:"Arraché",color:C_SN,vals:MH.map(m=>m.sn),dots:true,label:true},
+    {name:"Épaulé-jeté",color:C_CJ,vals:MH.map(m=>m.cj),dots:true,label:true}
+  ],{unit:"kg",h:240,aria:"Évolution des maxes à l'arraché et à l'épaulé-jeté, avec les objectifs",
+     refs:[{v:GOAL.sn,color:C_SN,label:"objectif arraché "+fmt(GOAL.sn)},{v:GOAL.cj,color:C_CJ,label:"objectif épaulé-jeté "+fmt(GOAL.cj)}]});
+  renderGoals();
+  const f=MH[0],l=MH[MH.length-1];
+  document.getElementById("maxNote").textContent=MH.length<2
+    ?"Un seul point pour l'instant. Le graphique se remplit à chaque mise à jour de tes maxes, par exemple après le test du bloc 4."
+    :"Depuis le "+ml[0].long+" : arraché "+(l.sn>=f.sn?"+":"")+fmt(l.sn-f.sn)+" kg, épaulé-jeté "+(l.cj>=f.cj?"+":"")+fmt(l.cj-f.cj)+" kg.";
+  document.getElementById("tblMax").innerHTML='<table class="d"><tr><th>Date</th><th>Arraché</th><th>Épaulé-jeté</th></tr>'+
+    MH.map((m,i)=>'<tr><td>'+ml[i].long+'</td><td>'+fmt(m.sn)+'</td><td>'+fmt(m.cj)+'</td></tr>').join("")+'</table>';
+}
+/* ---- objectifs ---- */
+const GL=[
+  {k:"sn",n:"Arraché",m:"sn"},{k:"cj",n:"Épaulé-jeté",m:"cj"},{k:"tot",n:"Total"},
+  {k:"hs",n:"Hang snatch"},{k:"hc",n:"Hang clean"},{k:"ps",n:"Power snatch"},{k:"pc",n:"Power clean"},
+  {k:"pp",n:"Push press"},{k:"bs",n:"Back squat",m:"bs"},{k:"fs",n:"Front squat",m:"fs"},{k:"ohs",n:"Overhead squat"}
+];
+function curOf(g){if(g.k==="tot")return M.sn+M.cj;if(g.m)return M[g.m];const v=REC[g.k];return v===undefined?null:v;}
+function goalOf(g){return g.k==="tot"?GOAL.sn+GOAL.cj:GOAL[g.k];}
+function renderGoals(){
+  const tot=M.sn+M.cj,gt=GOAL.sn+GOAL.cj,pc=Math.min(100,Math.round(tot/gt*100));
+  document.getElementById("goalHead").innerHTML=
+    '<div><div class="big">'+fmt(tot)+' <small>/ '+fmt(gt)+' kg de total</small></div>'+
+    '<div class="sub2">'+pc+' % de l\'objectif · encore '+fmt(Math.max(0,gt-tot))+' kg</div></div>'+
+    '<div class="sub2">Étape à 1 an : 125–130 kg</div>'+
+    '<div class="gbar" style="flex-basis:100%"><i style="width:'+pc+'%"></i></div>';
+  let h='<tr><th>Mouvement</th><th>Actuel</th><th>Objectif</th><th>Écart</th></tr>';
+  GL.forEach(g=>{
+    const c=curOf(g),t=goalOf(g),tot=g.k==="tot";
+    const cur=tot?fmt(c):'<input type="number" step="0.5" inputmode="decimal" data-c="'+g.k+'" value="'+(c===null?"":c)+'" placeholder="—">';
+    const tgt=tot?fmt(t):'<input type="number" step="0.5" inputmode="decimal" data-g="'+g.k+'" value="'+t+'">';
+    let gap="",cls="";
+    if(c!==null&&t){const d=t-c;gap=d<=0?"atteint":"+"+fmt(d);cls=d<=0?"ok":"gap";}
+    const w=c!==null&&t?Math.min(100,Math.round(c/t*100)):0;
+    h+='<tr'+(tot?' class="tot"':'')+'><td>'+g.n+'<span class="mini"><i style="width:'+w+'%"></i></span></td><td>'+cur+'</td><td>'+tgt+'</td><td class="'+cls+'">'+gap+'</td></tr>';
+  });
+  const tb=document.getElementById("goalTbl");tb.innerHTML=h;
+  tb.querySelectorAll("input[data-c]").forEach(i=>i.onchange=()=>{
+    const k=i.dataset.c,v=parseFloat(String(i.value).replace(",","."));
+    const g=GL.find(x=>x.k===k);
+    if(g.m){if(!isNaN(v)&&v>0){M[g.m]=v;if(g.m==="sn"||g.m==="cj")logMax();const el=document.getElementById("m_"+g.m);if(el)el.value=v;}}
+    else{if(!isNaN(v)&&v>0)REC[k]=v;else delete REC[k];}
+    save();render();renderSuivi();
+  });
+  tb.querySelectorAll("input[data-g]").forEach(i=>i.onchange=()=>{
+    const v=parseFloat(String(i.value).replace(",","."));
+    if(!isNaN(v)&&v>0){GOAL[i.dataset.g]=v;save();renderSuivi();}
+  });
+  const r1=Math.round(M.sn/M.cj*100),r2=Math.round(M.cj/M.fs*100),t1=Math.round(GOAL.sn/GOAL.cj*100);
+  document.getElementById("ratioNote").innerHTML=
+    '<b>Ratios</b> · arraché / épaulé-jeté : '+r1+' % (objectif : '+t1+' %). Épaulé-jeté / front squat : '+r2+' % (repère : 85–90 %). '+
+    (r2<85?'Ton épaulé-jeté est en dessous de ce que ta force de squat permet : la marge de progrès est surtout technique.':'Ta force de squat est bien exploitée : pour progresser, il faudra aussi faire monter le front squat.');
+}
+let rsz;window.addEventListener("resize",()=>{clearTimeout(rsz);rsz=setTimeout(()=>{if(S.tab==="suivi")renderSuivi();},150);});
+/* ---- export / import ---- */
+function bindIO(){
+  const msg=t=>document.getElementById("ioMsg").textContent=t;
+  const ta=document.getElementById("ioText");
+  document.getElementById("exportBtn").onclick=async()=>{
+    const txt=JSON.stringify(packState());
+    ta.value=txt;
+    try{await navigator.clipboard.writeText(txt);msg("Données copiées. Ouvre l'autre version, colle-les dans le cadre et appuie sur « Importer des données ».");}
+    catch(e){ta.select();msg("Copie automatique impossible : le texte est sélectionné dans le cadre, copie-le à la main.");}
+  };
+  document.getElementById("importBtn").onclick=()=>{
+    let d;
+    try{d=JSON.parse(ta.value.trim());}catch(e){msg("Ce texte n'est pas reconnu. Vérifie que tu as bien tout collé.");return;}
+    if(!d||typeof d!=="object"||!d.M||!d.DONE){msg("Ce texte ne ressemble pas à des données du programme.");return;}
+    applyState(d);
+    BOOT=false;save();bindMax();render();renderSuivi();
+    ta.value="";msg("Données importées ✓");
+  };
+}
+function initTabs(){
+  const show=t=>{
+    S.tab=t;save();
+    document.querySelectorAll(".tabs button").forEach(b=>{const on=b.dataset.t===t;b.classList.toggle("on",on);b.setAttribute("aria-selected",on);});
+    document.getElementById("tabProg").hidden=t!=="prog";
+    document.getElementById("tabSuivi").hidden=t!=="suivi";
+    if(t==="suivi")renderSuivi();
+  };
+  document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.t));
+  show(S.tab==="suivi"?"suivi":"prog");
+}
+
+load();if(!MH.length)logMax();bindMax();render();initTabs();bindIO();initCloud();
+</script>
+</body>
+</html>

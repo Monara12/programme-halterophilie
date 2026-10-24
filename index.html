@@ -93,6 +93,17 @@ details.fc{margin-top:10px;border-color:var(--lav-deep)}
 .bn.wk{background:#1f2e2a;border:1px solid #33a883;color:#7fd8b6;text-align:center}
 .bn.blk{background:linear-gradient(135deg,#3b2c52,#1f2e2a);border:1px solid var(--lav);color:var(--lav);text-align:center;font-family:Cinzel,serif;letter-spacing:.06em}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px}
+.days button.sep{box-shadow:inset 1px 0 0 var(--line)}
+.nx{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;margin:0 0 14px}
+.nx-t{display:block;font:500 .78rem Cinzel,serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nx-b{display:flex;gap:8px;flex-wrap:wrap}
+.nx-b button{flex:1 1 140px;text-align:left;border:1px solid var(--line);background:var(--bg2);color:var(--ink);border-radius:12px;padding:9px 11px;cursor:pointer;font:inherit}
+.nx-b button b{display:block;font-size:.9rem}
+.nx-b button small{display:block;font-size:.72rem;color:var(--muted);margin-top:2px}
+.nx-b .nx-h{flex:2 1 220px;border-color:var(--lav-deep);background:linear-gradient(135deg,rgba(154,122,216,.28),rgba(154,122,216,.08))}
+.nx-b .nx-c small{color:var(--sky)}.nx-b .nx-m small{color:var(--mint)}
+.nx-done{color:var(--gold);font-weight:600}
+.nx-hint{margin:8px 0 0;font-size:.78rem;color:var(--muted)}
 .days button.m small{color:var(--mint)}
 .note.m{border-left-color:var(--mint)}
 .ex .tag.mob{color:var(--mint)}
@@ -396,6 +407,7 @@ table.d th{color:var(--lav-deep);font-weight:600}
     <p class="tip">Les charges d'haltéro se recalculent seules à partir des maxes. Toute charge peut être modifiée à la main ; ↺ revient à la valeur proposée.</p>
   </details>
 
+  <div id="nextBox"></div>
   <div class="cont" id="blocks"></div>
   <div class="weeks" id="weeks"></div>
   <div class="days" id="days"></div>
@@ -415,18 +427,25 @@ table.d th{color:var(--lav-deep);font-weight:600}
     <button class="linkbtn" id="resetLoads">Remettre les charges proposées</button>
   </div>
 
-  <h2>La semaine</h2>
+  <h2>Le cycle</h2>
   <div class="panel">
+    <p class="tip" style="margin-top:0">Plus de jours fixes : un cycle = 3 séances d'haltéro (A, B, C), 3 séances de grimpe et la routine mobilité, faites quand tu peux. Un cycle dure en général 7 à 10 jours. Quand il est terminé, le suivant s'ouvre. La carte « Prochaine séance » t'indique toujours quoi faire.</p>
     <table class="t">
-      <tr><th>Jour</th><th>Séance</th><th>Pourquoi ici</th></tr>
-      <tr><td>Lundi</td><td>Repos + routine hanches</td><td>15 min de mobilité au calme : pas de fatigue, et les hanches gagnent de l'amplitude.</td></tr>
-      <tr><td>Mardi</td><td>Escalade · force</td><td>Doigts frais après le repos : c'est le jour pour la grimpe à la limite.</td></tr>
-      <tr><td>Mercredi</td><td>Haltéro · épaulé-jeté</td><td>Jambes fraîches, peu de tirage de doigts.</td></tr>
-      <tr><td>Jeudi</td><td>Escalade · technique</td><td>Intensité modérée pour arriver correcte à l'arraché.</td></tr>
-      <tr><td>Vendredi</td><td>Haltéro · arraché</td><td>Séance technique, pas de charges maximales.</td></tr>
-      <tr><td>Samedi</td><td>Haltéro · les deux</td><td>La séance la plus chargée, suivie d'une grimpe facile.</td></tr>
-      <tr><td>Dimanche</td><td>Escalade · endurance</td><td>Volume à faible intensité : aide à récupérer et construit la caisse.</td></tr>
+      <tr><th>Séance</th><th>Contenu</th><th>Où la placer</th></tr>
+      <tr><td>A</td><td>Haltéro · épaulé-jeté</td><td>De préférence en premier dans le cycle, jambes fraîches.</td></tr>
+      <tr><td>B</td><td>Haltéro · arraché</td><td>Séance technique. Après A, avec idéalement un jour sans haltéro entre les deux.</td></tr>
+      <tr><td>C</td><td>Haltéro · les deux</td><td>La plus chargée : à faire reposée, après un jour sans haltéro ou de grimpe facile.</td></tr>
+      <tr><td>G1</td><td>Grimpe · force</td><td>Doigts frais, après un jour sans charge. Pas la veille de la séance C.</td></tr>
+      <tr><td>G2</td><td>Grimpe · technique</td><td>Intensité modérée : peut se placer la veille d'une séance d'haltéro.</td></tr>
+      <tr><td>G3</td><td>Grimpe · endurance</td><td>Volume facile : idéale le lendemain de la séance C.</td></tr>
+      <tr><td>Mob</td><td>Routine hanches</td><td>Quand tu veux, idéalement un jour sans charge.</td></tr>
     </table>
+    <ul class="method" style="margin-top:12px">
+      <li><b>Ordre</b> : A → B → C. Si une séance saute, tu ne rattrapes rien : tu fais simplement la suivante.</li>
+      <li><b>Récupération</b> : idéalement un jour sans haltéro entre deux séances. Deux jours d'affilée, c'est possible ; trois, jamais.</li>
+      <li><b>Semaine chargée</b> : avec seulement 1 ou 2 séances d'haltéro, coche « Allonger la séance » pour garder du volume.</li>
+      <li><b>Longue coupure</b> : après plus de 10 jours sans haltéro, baisse les charges de 5 à 10 % pour la séance de reprise.</li>
+    </ul>
   </div>
 
   <h2>Le continuum</h2>
@@ -435,21 +454,21 @@ table.d th{color:var(--lav-deep);font-weight:600}
       <li><b>Bloc 1 · Positions et vitesse</b> : départs suspendus avec réception complète en squat, beaucoup de répétitions entre 55 et 70 %. Les versions power ne servent plus qu'en cas de gêne aux genoux.</li>
       <li><b>Bloc 2 · Du hang au sol</b> : réception complète depuis le hang, arrivée du jerk fendu.</li>
       <li><b>Bloc 3 · Mouvements complets</b> : arraché et épaulé-jeté depuis le sol, en doubles, jusqu'à 80 %.</li>
-      <li><b>Bloc 4 · Consolidation et test</b> : doubles plus lourds, test des maxes le samedi de la S4. On recalcule et on repart.</li>
+      <li><b>Bloc 4 · Consolidation et test</b> : doubles plus lourds, test des maxes à la séance C du cycle 4. On recalcule et on repart.</li>
     </ul>
   </div>
 
   <h2>Méthodes</h2>
   <div class="panel">
     <ul class="method">
-      <li><b>Les deux mouvements à chaque séance d'haltéro</b> : chaque mouvement revient 3 fois par semaine. La pratique distribuée ancre mieux le geste.</li>
-      <li><b>Périodisation par blocs</b> : charge croissante S1 → S3, allègement ou test en S4. La S4 allège aussi l'escalade.</li>
+      <li><b>Les deux mouvements à chaque séance d'haltéro</b> : chaque mouvement revient 3 fois par cycle. La pratique distribuée ancre mieux le geste.</li>
+      <li><b>Périodisation par blocs</b> : charge croissante C1 → C3, allègement ou test au C4. Le C4 allège aussi l'escalade.</li>
       <li><b>Complexes ciblés</b> : quelques mouvements principaux sont remplacés par des complexes (plusieurs mouvements enchaînés sans lâcher la barre). Bloc 1 : hang snatch + overhead squats et tirage + hang clean + front squat, pour la position basse et la mobilité sous charge. Bloc 2 : hang + mouvement complet, pour transférer la position haute vers le sol. Bloc 3 : arraché avec pause au genou + arraché, pour la chaîne postérieure au premier tirage. Le bloc 4 reste sur les mouvements de compétition. Charge d'un complexe = celle que tu tiens sur le mouvement le plus difficile.</li>
       <li><b>Apprentissage « top-down »</b> : des positions hautes vers le sol. Réception complète en squat dès que possible : c'est la position de compétition, et elle travaille la mobilité de hanche et de cheville sous charge.</li>
       <li><b>Renforcement complémentaire de l'escalade</b> : poussées, coiffe des rotateurs, extenseurs du poignet, jambes unilatérales. Pas de tirage vertical ni de rowing lourd : l'escalade s'en charge déjà.</li>
       <li><b>Mobilité hanches et chevilles intégrée</b> : 3 exercices de mobilité active ou lestée par séance d'haltéro, faits pendant les temps de repos. Hanches (rotation, adducteurs, fléchisseurs) et dorsiflexion de cheville, pour une réception plus basse et un buste plus droit.</li>
-      <li><b>Priorité chaîne postérieure et hanches</b> : activation des fessiers et mobilité de hanche à chaque échauffement, 2 exercices de chaîne postérieure par séance de renfo (nordic, extension à 45°, RDL, hip thrust, RDL unilatéral) et une routine hanches le lundi.</li>
-      <li><b>Gestion de l'interférence</b> : sangles sur les tirages et le RDL pour épargner les doigts, intensité maximale en escalade un seul jour par semaine, après le repos.</li>
+      <li><b>Priorité chaîne postérieure et hanches</b> : activation des fessiers et mobilité de hanche à chaque échauffement, 2 exercices de chaîne postérieure par séance de renfo (nordic, extension à 45°, RDL, hip thrust, RDL unilatéral) et une routine hanches à chaque cycle.</li>
+      <li><b>Gestion de l'interférence</b> : sangles sur les tirages et le RDL pour épargner les doigts, intensité maximale en escalade une seule fois par cycle, doigts frais.</li>
       <li><b>RPE (effort perçu, de 6 à 10)</b> : note chaque exercice chargé après ta dernière série. 10 = maximal, 9 = 1 répétition en réserve, 8 = 2, 7 = 3, 6 = 4 ou plus. En haltéro, pense aussi vitesse de barre et propreté technique. Cible : RPE 6,5 au bloc 1, 7 au bloc 2, 7,5 au bloc 3, 8 au bloc 4, 6 en déload ; renfo à 8. Haltéro : chaque point au-dessus de la cible baisse la suite d'environ 2,5 %, chaque point en dessous la monte d'autant (+4 % maximum par séance). Renfo : RPE 6 ou moins → double incrément, 6,5–8 → incrément normal, 8,5–9 → même charge, 10 → on redescend d'un cran.</li>
       <li><b>Progression automatique</b> : chaque charge proposée tient compte de tes séances réelles. Haltéro : la page compare ce que tu as fait au prévu sur tes 3 dernières séances du même exercice (ou, pour un nouvel exercice, des mouvements principaux de la même famille) et ajuste la suite (de −15 % à +5 %). Toutes les séries validées font monter, une séance incomplète fait redescendre. Renfo et mobilité : dernière charge + l'incrément si toutes les séries sont validées, même charge sinon. Le RPE noté affine tout ça (voir ci-dessous). Pour que ça marche, mets ta vraie charge dans la case avant de cocher.</li>
       <li><b>Autorégulation</b> : barre lente ou technique qui se dégrade = on garde ou on baisse la charge. Même règle en escalade si les doigts tirent.</li>
@@ -469,9 +488,9 @@ table.d th{color:var(--lav-deep);font-weight:600}
       <li><b>Hanches</b> : mobilité sans douleur, jamais en forçant. Si une position reste bloquée malgré la routine, en reparler avec ton ostéo.</li>
       <li><b>Genoux</b> : gêne → versions power et squat stop 90°. Douleur → seulement tirages, push press et renfo du haut.</li>
       <li><b>Doigts</b> : douleur à une poulie ou à la base d'un doigt → pas de suspension ni de réglettes, grimpe sur grosses prises seulement, et on en parle à un kiné.</li>
-      <li><b>Épaules</b> : fatiguées le vendredi → retirer le snatch balance ou l'overhead squat.</li>
-      <li><b>Séance manquée</b> : la reporter au lendemain ou au surlendemain, aux mêmes charges. Si le lendemain du report est un jour sans charge, tu peux l'allonger (case « Allonger la séance ») : un peu plus de volume, jamais plus lourd. Si elle tombe sur un jour de grimpe d'endurance, c'est la grimpe qui saute. Plus de 2 jours de retard : on la laisse tomber et on reprend le programme normalement. Indique le report avec « Séance faite » sous l'intro de la séance.</li>
-      <li><b>Fatigue générale</b> : si tout est lourd deux séances de suite, la séance d'escalade du jeudi devient une séance facile.</li>
+      <li><b>Épaules</b> : fatiguées à la séance B → retirer le snatch balance ou l'overhead squat.</li>
+      <li><b>Séance manquée</b> : rien à rattraper, tu fais la suivante quand tu peux, aux charges prévues. Si tu n'as fait qu'une ou deux séances d'haltéro dans la semaine, tu peux allonger la suivante (case « Allonger la séance ») : un peu plus de volume, jamais plus lourd.</li>
+      <li><b>Fatigue générale</b> : si tout est lourd deux séances de suite, la grimpe suivante devient une séance facile.</li>
       <li><b>Repos</b> : 2 min sur les séries techniques, 2 min 30–3 min sur les plus lourdes, 60–90 s en renfo.</li>
       <li><b>Vidéo</b> : filme une série par mouvement principal, de profil.</li>
     </ul>
@@ -485,12 +504,12 @@ table.d th{color:var(--lav-deep);font-weight:600}
       <p class="tip" id="planHead" style="margin:6px 0 10px"></p>
       <div class="pg-wrap" id="planGrid"></div>
       <div class="pg-leg"><span><i style="background:#9a7ad8"></i>Arraché</span><span><i style="background:#33a883"></i>Épaulé-jeté</span><span><i style="background:#a9c4ec"></i>Squats</span><span><i style="background:#e8c07a"></i>Tirages</span><span><i style="background:#e6a9c9"></i>Renfo</span></div>
-      <p class="tip">Séries × répétitions · charge prévue (ou réalisée si tu l'as cochée). ✓ séance terminée, point violet séance commencée, colonne encadrée = semaine en cours. Touche une case pour ouvrir la séance.</p>
+      <p class="tip">Séries × répétitions · charge prévue (ou réalisée si tu l'as cochée). ✓ séance terminée, point violet séance commencée, colonne encadrée = cycle en cours. Touche une case pour ouvrir la séance.</p>
     </div>
     <h2>Frise du continuum</h2>
     <div class="panel">
       <div class="pg-wrap" id="timeline"></div>
-      <p class="tip">Les 16 semaines d'un coup d'œil : l'exercice principal de chaque famille et son intensité (% du max). Plus la teinte est foncée, plus c'est lourd. ▼ = semaine en cours. On voit la logique : positions et vitesse, puis transfert vers le sol, puis mouvements complets, puis compétition.</p>
+      <p class="tip">Les 16 cycles d'un coup d'œil : l'exercice principal de chaque famille et son intensité (% du max). Plus la teinte est foncée, plus c'est lourd. ▼ = cycle en cours. On voit la logique : positions et vitesse, puis transfert vers le sol, puis mouvements complets, puis compétition.</p>
     </div>
   </div>
 
@@ -501,17 +520,17 @@ table.d th{color:var(--lav-deep);font-weight:600}
     </div>
     <h2>Volume et charge</h2>
     <div class="panel">
-      <p class="chart-ttl" style="margin-top:4px">Tonnage par semaine</p>
+      <p class="chart-ttl" style="margin-top:4px">Tonnage par cycle</p>
       <div class="legend"><span><i class="sw" style="border-color:#9a7ad8;border-top-width:8px;width:12px"></i>Haltérophilie</span><span><i class="sw" style="border-color:#33a883;border-top-width:8px;width:12px"></i>Renforcement</span></div>
       <div class="chart" id="chartTon"></div>
       <p class="chart-ttl">ACWR (charge aiguë / chronique)</p>
       <div class="chart" id="chartAcwr"></div>
-      <p class="tip">Tonnage = charge × répétitions × séries validées. ACWR = tonnage de la semaine ÷ moyenne des 4 dernières semaines. Entre 0,8 et 1,3, la charge augmente sans excès ; au-dessus de 1,5, elle monte trop vite et le risque de blessure augmente. L'escalade et la mobilité ne sont pas comptées dans le tonnage.</p>
+      <p class="tip">Tonnage = charge × répétitions × séries validées. ACWR = tonnage du cycle ÷ moyenne des 4 derniers cycles. Entre 0,8 et 1,3, la charge augmente sans excès ; au-dessus de 1,5, elle monte trop vite et le risque de blessure augmente. L'escalade et la mobilité ne sont pas comptées dans le tonnage.</p>
     </div>
     <h2>Régularité</h2>
     <div class="panel">
       <div id="heat"></div>
-      <p class="tip">Chaque case est un jour du programme (L → D), chaque ligne une semaine. Carré = haltéro, rond = escalade, trait = mobilité du lundi. Plus la case est claire, plus de séries ont été validées ce jour-là. Touche une case pour le détail.</p>
+      <p class="tip">Chaque case est une séance du cycle (A, B, C, grimpes 1 à 3, mobilité), chaque ligne un cycle. Carré = haltéro, rond = escalade, trait = mobilité. Plus la case est claire, plus de séries ont été validées. Touche une case pour le détail.</p>
     </div>
     <h2>Séries FFHM · seniors femmes</h2>
     <div class="panel">
@@ -681,8 +700,8 @@ const EX = {
   cx_hs_sn:{n:"Complexe : hang snatch + arraché",b:"sn",d:"1 hang snatch (départ au-dessus des genoux), tu reposes la barre au sol, puis 1 arraché depuis le sol. = 1 série.",c:["Même position haute sur les deux","Premier tirage lent sur l'arraché","Réception complète, 1 s en bas"],w:"Transfert du hang vers le sol pour l'arraché."},
   cx_psn_sn:{n:"Complexe : arraché avec pause au genou + arraché",b:"sn",d:"1 arraché avec une pause de 2 s juste sous les genoux, puis 1 arraché normal enchaîné. = 1 série.",c:["Pendant la pause : épaules devant la barre, dos plat, poids sur tout le pied","Pas de rebond pour repartir","Le 2e arraché garde la même trajectoire"],w:"Renforce la chaîne postérieure dans la position du premier tirage et corrige les hanches qui montent trop vite."},
   cl_sj:{n:"Épaulé-jeté (compétition)",b:"cj",d:"Le mouvement de compétition : épaulé complet depuis le sol, tu te relèves, puis jerk fendu. Barre au sol entre les répétitions : × 2 = 2 épaulés-jetés complets.",c:["Reprends ton souffle et replace les mains sur la barre avant le jerk","Dip court et vertical, puis fente rapide : pied avant à plat, talon arrière levé","Fente courte et équilibrée, hanches sous la barre","Ramener le pied avant, puis le pied arrière, bras verrouillés","Tenir 1 s à la fin, comme pour le signal de l'arbitre"],w:"Automatiser le mouvement exact de la compétition, avec le jerk fendu."},
-  cj_l:{n:"Épaulé-jeté · singles d'affûtage",b:"cj",d:"3 épaulés-jetés seuls, lourds mais propres, avec 2 min 30 de repos. Ils gardent le système nerveux habitué aux charges lourdes avant le test du samedi, sans fatigue.",c:["Montée : 50 %, 60 %, 70 %, 75 % en 1 répétition","Chaque single doit être rapide et sûr : s'il ralentit, on s'arrête","Pas d'échec cette semaine"],w:"Affûtage : très peu de volume, mais on touche le lourd."},
-  sn_s:{n:"Arraché · singles d'affûtage",b:"sn",d:"3 arrachés seuls à 80 %, 2 min 30 de repos, puis 2 doubles légers pour la vitesse.",c:["Montée : 50 %, 60 %, 70 % en 1 répétition","Réception tenue 1 s, comme un essai validé","Pas d'échec cette semaine"],w:"Affûtage : rester vive sur les charges lourdes sans accumuler de fatigue."},
+  cj_l:{n:"Épaulé-jeté · singles d'affûtage",b:"cj",d:"3 épaulés-jetés seuls, lourds mais propres, avec 2 min 30 de repos. Ils gardent le système nerveux habitué aux charges lourdes avant le test (séance C), sans fatigue.",c:["Montée : 50 %, 60 %, 70 %, 75 % en 1 répétition","Chaque single doit être rapide et sûr : s'il ralentit, on s'arrête","Pas d'échec dans ce cycle"],w:"Affûtage : très peu de volume, mais on touche le lourd."},
+  sn_s:{n:"Arraché · singles d'affûtage",b:"sn",d:"3 arrachés seuls à 80 %, 2 min 30 de repos, puis 2 doubles légers pour la vitesse.",c:["Montée : 50 %, 60 %, 70 % en 1 répétition","Réception tenue 1 s, comme un essai validé","Pas d'échec dans ce cycle"],w:"Affûtage : rester vive sur les charges lourdes sans accumuler de fatigue."},
   clp:{n:"Tirage d'épaulé",b:"cj",d:"Mouvement de l'épaulé jusqu'à l'extension complète et au haussement d'épaules, sans réception.",c:["Bras longs","Extension complète",STRAPS]},
   clsd:{n:"Soulevé de terre épaulé avec pauses",b:"cj",d:"Prise d'épaulé, pauses 2 s sous les genoux et mi-cuisses.",c:["Épaules devant la barre","Genoux qui reculent",STRAPS]},
   pp:{n:"Push press",b:"cj",d:"Barre en rack. Petit dip, impulsion des jambes, finition aux bras jambes tendues.",c:["Dip court, buste droit","Poids sur tout le pied","Tête qui avance sous la barre en fin"]},
@@ -699,8 +718,8 @@ const EX = {
   wrist:{n:"Extension des poignets",d:"Avant-bras sur la cuisse, paume vers le bas, haltère léger. Relever le poignet puis descendre en 3 s.",c:["Mouvement lent","Pas d'élan"],w:"Équilibre les fléchisseurs très sollicités en escalade : prévient l'épicondylite."},
   rdl:{n:"Soulevé de terre roumain",d:"Barre en main, genoux légèrement fléchis. Descendre en reculant les hanches jusqu'à mi-tibia, dos plat, puis remonter.",c:["Barre collée aux jambes","Étirement des ischios, pas d'arrondi",STRAPS],w:"Chaîne postérieure pour le premier tirage."},
   er:{n:"Rotations externes à la poulie ou à l'élastique",d:"Coude collé au corps à 90°, tourner l'avant-bras vers l'extérieur, retour lent.",c:["Coude fixe","Charge légère, mouvement propre"],w:"Coiffe des rotateurs : protège l'épaule pour l'escalade et les réceptions bras tendus."},
-  bench:{n:"Développé couché",d:"Allongée sur le banc, omoplates serrées, pieds ancrés au sol. Descendre la barre au bas des pectoraux, coudes à 45°, puis pousser.",c:["Omoplates serrées tout du long","Barre qui touche la poitrine sans rebond","Épaules fatiguées après l'escalade du jeudi → remplacer par 3 × 10–12 pompes"],w:"Poussée horizontale, antagoniste de l'escalade, avec une charge facile à faire progresser."},
-  pushup:{n:"Pompes",d:"Corps gainé, poitrine jusqu'au sol, coudes à 45°.",c:["Bassin aligné","Omoplates qui s'écartent en haut"],w:"Version légère du développé couché pour la semaine de déload."},
+  bench:{n:"Développé couché",d:"Allongée sur le banc, omoplates serrées, pieds ancrés au sol. Descendre la barre au bas des pectoraux, coudes à 45°, puis pousser.",c:["Omoplates serrées tout du long","Barre qui touche la poitrine sans rebond","Épaules fatiguées après une grimpe → remplacer par 3 × 10–12 pompes"],w:"Poussée horizontale, antagoniste de l'escalade, avec une charge facile à faire progresser."},
+  pushup:{n:"Pompes",d:"Corps gainé, poitrine jusqu'au sol, coudes à 45°.",c:["Bassin aligné","Omoplates qui s'écartent en haut"],w:"Version légère du développé couché pour le cycle de déload."},
   pallof:{n:"Pallof press",d:"De profil à la poulie ou à l'élastique, mains contre la poitrine. Tendre les bras devant soi sans laisser le buste tourner, tenir 2 s.",c:["Bassin face à l'avant","Respiration contrôlée"],w:"Gainage anti-rotation : utile en dévers et pour garder les pieds sur le mur."},
   kneewall:{n:"Genou au mur lesté",d:"En fente, pied avant à une dizaine de cm du mur, kettlebell posée sur le genou avant. Amener le genou vers le mur sans décoller le talon, tenir 2 s, revenir.",c:["Talon collé au sol","Genou dans l'axe du 2e orteil","Reculer le pied d'1 cm quand c'est facile"],w:"Dorsiflexion de cheville sous charge : permet au genou d'avancer en réception basse sans que le buste plonge."},
   cossackg:{n:"Cossack squat gobelet",d:"Pieds très écartés, kettlebell contre la poitrine. Descendre sur une jambe, l'autre tendue pointe vers le haut, puis passer de l'autre côté.",c:["Talon de la jambe pliée au sol","Buste le plus droit possible","Descendre seulement jusqu'où le dos reste plat"],w:"Mobilité des adducteurs et de la hanche en charge, plus la dorsiflexion de la jambe pliée."},
@@ -724,7 +743,7 @@ const EX = {
   campus:{n:"Mouvements dynamiques",d:"Blocs à mouvements jetés ou coordination, sur grosses prises.",c:["Grosses prises seulement","Réception contrôlée"],w:"Puissance et coordination, sans stress sur les doigts."},
   tech:{n:"Exercices techniques",d:"Sur des blocs faciles : pieds silencieux, drapeaux, crochets de talon et de pointe, lectures avant de grimper.",c:["Un thème par séance","Grimper lentement et précisément"],w:"La technique est le levier le plus rapide pour progresser."},
   fourx4:{n:"4 × 4 en bloc",d:"4 blocs 2–3 niveaux sous ton max, enchaînés sans pause. 4 séries, 4 min de repos.",c:["Rester propre même fatiguée","Si tu chutes, reprendre au mouvement"],w:"Résistance : enchaîner les mouvements difficiles."},
-  arc:{n:"ARC (continuité)",d:"Grimper sans s'arrêter sur des voies ou une traversée faciles, avec une légère congestion des avant-bras, jamais au point de lâcher.",c:["Intensité 4–5/10","Respiration fluide","Repos au sol égal au temps de grimpe"],w:"Endurance de base et récupération active après la séance lourde du samedi."},
+  arc:{n:"ARC (continuité)",d:"Grimper sans s'arrêter sur des voies ou une traversée faciles, avec une légère congestion des avant-bras, jamais au point de lâcher.",c:["Intensité 4–5/10","Respiration fluide","Repos au sol égal au temps de grimpe"],w:"Endurance de base et récupération active après la séance C, la plus lourde."},
   vol:{n:"Volume de voies ou blocs faciles",d:"Enchaîner des voies ou blocs de niveau confortable, en soignant les placements.",c:["Pas de projet","Jamais de chute de fatigue"],w:"Accumule des heures de mur sans fatigue nerveuse."},
   m_9090:{n:"90/90 transitions actives",d:"Assise au sol, une jambe devant et une derrière, toutes deux à 90°. Basculer les genoux de l'autre côté sans les mains, buste droit.",c:["Bouger lentement","S'aider des mains au début si besoin"],w:"Rotation interne et externe de hanche, souvent la plus verrouillée."},
   m_couch:{n:"Étirement du canapé (couch stretch)",d:"Genou arrière contre un mur ou un canapé, tibia vertical, pied avant au sol. Serrer le fessier et redresser le buste.",c:["Bassin rentré, pas de cambrure","Respiration lente"],w:"Fléchisseurs de hanche raides = bassin basculé et fessiers qui travaillent mal."},
@@ -740,7 +759,7 @@ const EX = {
    m = 1 → mouvement principal · s = séries [S1..S4] · r = reps · p = % du max */
 const BLOCKS = [
  {id:"B1",name:"Positions & vitesse",rpe:"RPE 6–7",
-  goal:"Départs suspendus avec réception complète en squat : beaucoup de répétitions légères pour fixer le placement et la position basse. (S1 faite en versions power.)",
+  goal:"Départs suspendus avec réception complète en squat : beaucoup de répétitions légères pour fixer le placement et la position basse. (C1 fait en versions power.)",
   days:{
    mer:{t:"Dominante épaulé-jeté",ex:[
      {e:"hps",s:[4,0,0,0],r:"× 2",p:[55,0,0,0]},
@@ -806,8 +825,8 @@ const BLOCKS = [
      {e:"cl_sj",m:1,s:[5,5,5,3],r:"× 2",p:[68,72,76,62]},
      {e:"bsq",s:[5,5,5,3],r:"× 4",p:[76,79,82,72]}]}
   }},
- {id:"B4",name:"Consolidation & test",rpe:"RPE 8 · S4 test",test:true,
-  goal:"Doubles plus lourds sur les mouvements complets, puis semaine 4 allégée avec test des maxes le samedi.",
+ {id:"B4",name:"Consolidation & test",rpe:"RPE 8 · C4 test",test:true,
+  goal:"Doubles plus lourds sur les mouvements complets, puis cycle 4 allégé avec test des maxes à la séance C.",
   days:{
    mer:{t:"Dominante épaulé-jeté",ex:[
      {e:"sn",s:[3,3,3,3],r:"× 2",p:[62,65,65,55]},
@@ -872,21 +891,21 @@ const RENFO = {
 /* =============== ESCALADE (identique dans tous les blocs, S4 allégée) =============== */
 const CLIMB = {
   mar:{t:"Force · doigts et bloc à la limite",
-    goal:"Le seul jour de grimpe intense de la semaine, doigts frais après le repos du lundi.",
+    goal:"La seule grimpe intense du cycle : à faire doigts frais, après un jour sans charge. Évite la veille de la séance C.",
     ex:[
       {e:"hang",s:[5,5,6,3],r:"× 10 s",k:[0,0,0,0],u:"kg lest"},
       {e:"limit",s:[5,5,6,3],r:"blocs · 3–5 essais"},
       {e:"campus",s:[4,4,4,0],r:"blocs"},
       {e:"wrist",s:[2,2,2,2],r:"× 15",k:[4,4,5,4],u:"kg"}]},
   jeu:{t:"Technique · placements et résistance",
-    goal:"Intensité modérée : la séance d'arraché technique a lieu le lendemain.",
+    goal:"Intensité modérée : elle peut se placer la veille d'une séance d'haltéro.",
     ex:[
       {e:"tech",s:[3,3,3,2],r:"thèmes × 10 min"},
       {e:"fourx4",s:[0,4,4,0],r:"séries"},
       {e:"vol",s:[4,0,0,4],r:"blocs faciles"},
       {e:"mob",s:[1,1,1,1],r:"× 5 min"}]},
   dim:{t:"Endurance · volume facile",
-    goal:"Après la séance lourde du samedi : grimper beaucoup, mais facile. Pas de projet, pas de dévers intense.",
+    goal:"Idéale le lendemain de la séance C : grimper beaucoup, mais facile. Pas de projet, pas de dévers intense.",
     ex:[
       {e:"arc",s:[3,3,3,2],r:"× 10–15 min"},
       {e:"vol",s:[6,6,6,4],r:"voies ou blocs"},
@@ -903,18 +922,22 @@ const MOB = {t:"Routine hanches et chaîne postérieure",
     {e:"m_deep",s:[3,3,3,3],r:"× 45 s"},
     {e:"m_cars",s:[2,2,2,2],r:"× 5 / côté"},
     {e:"m_bridge",s:[3,3,3,3],r:"× 30 s / côté"}]};
+/* séances du cycle : plus de jours fixes. Les clés internes (mer, ven…) restent pour garder les données. */
 const DAYS = {
-  lun:{s:"Lun",f:"Lundi",type:"m"},
-  mar:{s:"Mar",f:"Mardi",type:"c"},mer:{s:"Mer",f:"Mercredi",type:"h"},
-  jeu:{s:"Jeu",f:"Jeudi",type:"c"},ven:{s:"Ven",f:"Vendredi",type:"h"},
-  sam:{s:"Sam",f:"Samedi",type:"h"},dim:{s:"Dim",f:"Dimanche",type:"c"}
+  mer:{s:"A",h:"A",f:"Séance A",sub:"Ép.-jeté",type:"h"},
+  ven:{s:"B",h:"B",f:"Séance B",sub:"Arraché",type:"h"},
+  sam:{s:"C",h:"C",f:"Séance C",sub:"Les deux",type:"h"},
+  mar:{s:"G1",h:"1",f:"Grimpe 1",sub:"Force",type:"c"},
+  jeu:{s:"G2",h:"2",f:"Grimpe 2",sub:"Tech.",type:"c"},
+  dim:{s:"G3",h:"3",f:"Grimpe 3",sub:"Endur.",type:"c"},
+  lun:{s:"Mob",h:"M",f:"Mobilité",sub:"Hanches",type:"m"}
 };
 const BASE = {sn:"arraché",cj:"épaulé-jeté",bs:"back squat",fs:"front squat"};
 
 /* =============== ÉTAT =============== */
 let S={b:0,w:0,d:"mer",wuOpen:true,mobOpen:false,tab:"prog",ex:"bsq"};
 let M={sn:45,cj:60,bs:95,fs:80,round:1,bar:15};
-let OV={},DONE={},WD={},LOG={},MH=[],MOVED={},BON={};
+let OV={},DONE={},WD={},LOG={},MH=[],MOVED={},BON={},DT={};
 let GOAL={sn:71,cj:90,hs:68,hc:87,ps:61,pc:76,pp:65,bs:121,fs:100,ohs:71},REC={};
 let BONUSON=false,LOGP={},HARD={},RPE={},KW=[];
 function load(){
@@ -929,13 +952,25 @@ function load(){
     HARD=JSON.parse(localStorage.getItem("hc3-hard")||"{}");
     RPE=JSON.parse(localStorage.getItem("hc3-rpe")||"{}");
     KW=JSON.parse(localStorage.getItem("hc-kw")||"[]");
+    const dts=localStorage.getItem("hc-dt");DT=dts?JSON.parse(dts):null;
     MOVED=JSON.parse(localStorage.getItem("hc3-moved")||"{}");
     GOAL=Object.assign(GOAL,JSON.parse(localStorage.getItem("hc-goal")||"{}"));
     REC=JSON.parse(localStorage.getItem("hc-rec")||"{}");
     BON=JSON.parse(localStorage.getItem("hc3-bonus")||"{}");
     MH=JSON.parse(localStorage.getItem("hc-maxhist")||"[]");
   }catch(e){}
+  if(!DT)DT=seedDates();
   if(!DAYS[S.d])S.d="mer";
+}
+/* séances faites avant l'ajout des dates : date inconnue ("") */
+function seedDates(){const o={};Object.keys(DONE).forEach(k=>{if((DONE[k]||[]).length){const p=k.split("-");o[p[0]+"-"+p[1]+"-"+p[2]]="";}});return o;}
+/* date de la séance : notée à la première série cochée */
+function stampDates(){
+  if(BOOT)return;
+  const seen={};
+  Object.keys(DONE).forEach(k=>{if(!(DONE[k]||[]).length)return;const p=k.split("-");seen[p[0]+"-"+p[1]+"-"+p[2]]=1;});
+  Object.keys(seen).forEach(dk=>{if(!(dk in DT))DT[dk]=todayISO();});
+  Object.keys(DT).forEach(dk=>{if(!seen[dk])delete DT[dk];});
 }
 function save(){
   try{
@@ -948,7 +983,9 @@ function save(){
     localStorage.setItem("hc3-logp",JSON.stringify(LOGP));
     localStorage.setItem("hc3-hard",JSON.stringify(HARD));
     localStorage.setItem("hc3-rpe",JSON.stringify(RPE));
+    stampDates();
     localStorage.setItem("hc-kw",JSON.stringify(KW));
+    localStorage.setItem("hc-dt",JSON.stringify(DT));
     localStorage.setItem("hc3-moved",JSON.stringify(MOVED));
     localStorage.setItem("hc-goal",JSON.stringify(GOAL));
     localStorage.setItem("hc-rec",JSON.stringify(REC));
@@ -960,7 +997,7 @@ function save(){
 }
 /* ---- sauvegarde dans le compte Claude (privée, suit d'un appareil à l'autre) ---- */
 let CLOUD=null,cloudTimer=null,cloudBusy=false,cloudAgain=false,BOOT=true;
-function packState(){return{v:1,ts:Date.now(),S,M,OV,DONE,WD,LOG,LOGP,HARD,RPE,KW,MH,MOVED,BON,GOAL,REC};}
+function packState(){return{v:1,ts:Date.now(),S,M,OV,DONE,WD,LOG,LOGP,HARD,RPE,KW,DT,MH,MOVED,BON,GOAL,REC};}
 function applyState(d){
   if(!d)return;
   d=JSON.parse(JSON.stringify(d)); /* les données du compte arrivent verrouillées : on travaille sur une copie */
@@ -969,6 +1006,7 @@ function applyState(d){
   OV=d.OV||{};DONE=d.DONE||{};WD=d.WD||{};LOG=d.LOG||{};LOGP=d.LOGP||{};HARD=d.HARD||{};RPE=d.RPE||{};KW=d.KW||[];MH=d.MH||[];
   MOVED=d.MOVED||{};BON=d.BON||{};REC=d.REC||{};
   if(d.GOAL)GOAL=Object.assign(GOAL,d.GOAL);
+  DT=d.DT||seedDates();
 }
 function setSync(ok,txt){const el=document.getElementById("syncStatus");if(!el)return;el.textContent=txt;el.classList.toggle("ok",ok);}
 function scheduleCloud(){
@@ -996,7 +1034,7 @@ async function initCloud(){
     const d=snap.exists?snap.data():null;
     CLOUD=ref;
     if(d&&(d.ts||0)>=localTs){
-      applyState(d);
+      applyState(d);goNext();
       try{localStorage.setItem("hc-ts",String(d.ts||Date.now()));}catch(e){}
       bindMax();render();initTabs();
       setSync(true,"Sauvegardé dans ton compte ✓");
@@ -1028,7 +1066,7 @@ const FOCUS={
     d:[["Drop snatch","3 × 3 · barre","Barre sur les trapèzes, tu tombes en position basse sans dip : vitesse de réception."],
        ["Tall snatch","3 × 3 · barre","Même logique que le tall clean, bras qui poussent vers le haut."],
        ["Overhead squat tempo 3 s + 2 s en bas","2 × 3 · barre","Position basse sous charge : hanches, chevilles, épaules."]]},
-  sam:{obj:"Enchaîner arraché et épaulé-jeté complets à intensité moyenne en gardant les repères de la semaine.",cue:"Même placement qu'en semaine, même vitesse",
+  sam:{obj:"Enchaîner arraché et épaulé-jeté complets à intensité moyenne en gardant les repères des séances A et B.",cue:"Même placement qu'aux séances A et B, même vitesse",
     d:[["Segment snatch pull (pause genou + mi-cuisse)","2 × 2 · 50 %","Revoir les deux positions clés avant les arrachés."],
        ["Jeu de pieds du jerk fendu au bâton","3 × 5","Fente courte, pied avant à plat, retour avant puis arrière."],
        ["Jerk balance","3 × 3 · barre","Pied avant qui glisse sous la barre : fixe la réception en fente."]]},
@@ -1086,22 +1124,22 @@ const FOCUS={
   ven:{obj:"Arraché lourd en doubles, vitesse conservée malgré la charge.",cue:"Même vitesse qu'à 60 %",
     d:[["Tall snatch","2 × 3 · barre","Réveiller la vitesse sous la barre."],
        ["Complexe tirage d'arraché + arraché","2 × (1+1) · 55 %","Trajectoire avant les séries lourdes."]]},
-  sam:{obj:"Doubles à 74–82 % (S1-S3), puis test des maxes en S4.",cue:"Un essai à la fois, routine identique",
-    d:[["Montée de compétition simulée","S4 : 3 essais par mouvement","Premier essai sûr, deuxième au niveau, troisième pour le record."],
+  sam:{obj:"Doubles à 74–82 % (C1-C3), puis test des maxes au C4.",cue:"Un essai à la fois, routine identique",
+    d:[["Montée de compétition simulée","C4 : 3 essais par mouvement","Premier essai sûr, deuxième au niveau, troisième pour le record."],
        ["Rituel d'essai","à chaque série","Pieds, prise, respiration, regard."]]},
   mar:{obj:"Performance : essais sur projet ou blocs proches du max.",cue:"Peu d'essais, de qualité",
     d:[["Lire le bloc en entier avant chaque essai","chaque bloc","Mémoriser la séquence au sol."]]},
   jeu:{obj:"Lecture et enchaînement à vue.",cue:"Lire, mémoriser, grimper sans hésiter",
     d:[["Voies à vue","3 voies","Repérer repos et passages clés avant de partir."]]},
   dim:{obj:"Volume léger avant le cycle suivant.",cue:"Plaisir et fluidité",d:[]},
-  lun:{obj:"Entretien de la mobilité, la semaine du test.",cue:"Juste entretenir, rien forcer",d:[]}
+  lun:{obj:"Entretien de la mobilité, le cycle du test.",cue:"Juste entretenir, rien forcer",d:[]}
  }
 };
 function focusCard(){
   const el=document.getElementById("focus");if(!el)return;
   const F=(FOCUS[S.b]||{})[S.d];
   if(!F){el.innerHTML="";return;}
-  const deload=S.w===3?(BLOCKS[S.b].test?" · semaine de test : drills légers, juste pour les sensations":" · déload : drills à la barre seulement"):"";
+  const deload=S.w===3?(BLOCKS[S.b].test?" · cycle de test : drills légers, juste pour les sensations":" · déload : drills à la barre seulement"):"";
   let h='<details class="wu fold fc"'+(foldOpen("focus",true)?" open":"")+'><summary><span class="ttl">Objectif du jour</span><span class="chev">▾</span></summary><div class="fc-b">'+
     '<p class="fc-obj">'+F.obj+'</p><p class="fc-cue"><span>Mot d\'ordre</span>'+F.cue+'</p>';
   if(F.d.length){
@@ -1153,16 +1191,16 @@ function nav(){
   BLOCKS.forEach((b,i)=>{
     const x=document.createElement("button"),P=PR.blocks[i];
     x.innerHTML="<b>"+b.id+(P.complete?' <em class="ck">✓</em>':'')+"</b><span>"+b.name+"</span>"+
-      '<i class="pb"><s style="width:'+Math.round(P.pct*100)+'%"></s></i><small class="pc">'+P.done+' / 4 sem.</small>';
+      '<i class="pb"><s style="width:'+Math.round(P.pct*100)+'%"></s></i><small class="pc">'+P.done+' / 4 cycles</small>';
     x.className=(i===S.b?"on":"")+(P.complete?" done":"");
     x.onclick=()=>{S.b=i;save();render();};
     bEl.appendChild(x);
   });
   const wEl=document.getElementById("weeks");wEl.innerHTML="";
-  ["S1","S2","S3","S4"].forEach((w,i)=>{
+  ["C1","C2","C3","C4"].forEach((w,i)=>{
     const x=document.createElement("button");
     const P=PR.weeks[S.b*4+i];
-    x.innerHTML='<span>'+(i===3?(bl.test?"S4 test":"S4 déload"):w)+(P.complete?' ✓':'')+'</span><i class="pb"><s style="width:'+Math.round(P.pct*100)+'%"></s></i>';
+    x.innerHTML='<span>'+(i===3?(bl.test?"C4 test":"C4 déload"):w)+(P.complete?' ✓':'')+'</span><i class="pb"><s style="width:'+Math.round(P.pct*100)+'%"></s></i>';
     x.title=P.done+" / "+P.planned+" séances terminées";
     x.className=(i===S.w?"on":"")+(P.complete?" done":"");
     x.onclick=()=>{S.w=i;save();render();};
@@ -1171,11 +1209,11 @@ function nav(){
   const dEl=document.getElementById("days");dEl.innerHTML="";
   Object.keys(DAYS).forEach(k=>{
     const D=DAYS[k],x=document.createElement("button");
-    x.innerHTML=D.s+"<small>"+(D.type==="h"?"Haltéro":D.type==="c"?"Grimpe":"Mobil.")+"</small>";
-    const mv=["mer","ven","sam"].some(d=>{const t=MOVED[S.b+"-"+S.w+"-"+d];return t&&t!==d&&(d===k||t===k);});
+    x.innerHTML=D.s+"<small>"+D.sub+"</small>";
+    const mv=false;
     const st=PR.days[S.b+"-"+S.w+"-"+k].st;
     if(st==="done"||st==="part"||st==="skip")x.innerHTML+='<span class="dst '+st+'">'+(st==="done"?"✓":st==="skip"?"–":"")+'</span>';
-    x.className=D.type+(k===S.d?" on":"")+(mv?" moved":"")+(st==="done"?" ddone":"");
+    x.className=D.type+(k===S.d?" on":"")+(mv?" moved":"")+(st==="done"?" ddone":"")+(k==="mar"||k==="lun"?" sep":"");
     x.onclick=()=>{S.d=k;save();render();};
     dEl.appendChild(x);
   });
@@ -1184,20 +1222,20 @@ function intro(){
   const bl=BLOCKS[S.b],D=DAYS[S.d];
   let html;
   if(D.type==="m"){
-    html='<div class="note m"><b>'+D.f+' — '+MOB.t+'</b>'+MOB.goal+' Tu peux aussi la faire un soir de semaine en plus.</div>'+movedHere();
+    html='<div class="note m"><b>'+D.f+' — '+MOB.t+'</b>'+MOB.goal+' À placer quand tu veux dans le cycle, idéalement un jour sans charge. Tu peux la refaire un soir en plus.</div>';
   }else if(D.type==="c"){
     const c=CLIMB[S.d];
-    const extra=S.w===3?" <i>Semaine allégée : moins de volume, pas d'essais maximaux.</i>":"";
-    html='<div class="note c"><b>'+D.f+' — '+c.t+'</b>'+c.goal+extra+'</div>'+movedHere();
+    const extra=S.w===3?" <i>Cycle allégé : moins de volume, pas d'essais maximaux.</i>":"";
+    html='<div class="note c"><b>'+D.f+' — '+c.t+'</b>'+c.goal+extra+'</div>';
   }else{
     const day=bl.days[S.d];
     let title=day.t;
     if(bl.test&&S.w===3&&day.testT)title=day.testT;
     let extra="";
     if(S.w===3&&!bl.test)extra=" <i>Déload : mêmes exercices, moins de séries, charges allégées.</i>";
-    if(S.w===3&&bl.test&&S.d!=="sam")extra=" <i>Semaine d'affûtage : très peu de séries, mais quelques singles lourds (80–82 %) pour arriver vive au test du samedi. Aucun échec cette semaine.</i>";
+    if(S.w===3&&bl.test&&S.d!=="sam")extra=" <i>Cycle d'affûtage : très peu de séries, mais quelques singles lourds (80–82 %) pour arriver vive au test (séance C). Aucun échec dans ce cycle. Laisse au moins 2 jours entre cette séance et le test.</i>";
     if(S.w===3&&bl.test&&S.d==="sam")extra=" <i>Pas de renfo aujourd'hui.</i>";
-    html='<div class="note"><b>'+bl.id+' · '+D.f+' — '+title+'</b>'+bl.goal+' Cible : '+bl.rpe+'.'+extra+'</div>'+moveBox()+movedHere();
+    html='<div class="note"><b>'+bl.id+' · '+D.f+' — '+title+'</b>'+bl.goal+' Cible : '+bl.rpe+'.'+extra+'</div>'+bonusBox();
   }
   document.getElementById("intro").innerHTML=html;
   const ms=document.getElementById("moveSel");
@@ -1284,7 +1322,7 @@ function kAdj(e,pos,w){
   const x=L[0],it=findItem(x.b,x.w,x.d,x.e);if(!it||!it.k)return null;
   const inc=INC[e]||2.5,step=inc<1?0.5:inc<2?1:inc<2.5?2:2.5;
   const rnd=v=>Math.round(v/step)*step;
-  if(w===3)return{val:rnd(x.v*0.9),from:x.v,note:"semaine allégée"};
+  if(w===3)return{val:rnd(x.v*0.9),from:x.v,note:"cycle allégé"};
   const rp=rpeOf(x.k);
   if(!complete(x,it)){
     if(rp!==null&&rp>=9.5)return{val:Math.max(step,x.v-inc),from:x.v,note:"−"+fmt(inc)+" (incomplète, RPE "+fmt(rp)+")"};
@@ -1296,7 +1334,60 @@ function kAdj(e,pos,w){
   if(rp<=9)return{val:x.v,from:x.v,note:"même charge (RPE "+fmt(rp)+")"};
   return{val:Math.max(step,x.v-inc),from:x.v,note:"−"+fmt(inc)+" (RPE "+fmt(rp)+", à la limite)"};
 }
-/* ---- report de séance ---- */
+/* ---- séance allongée (quand tu as plus de temps, ou peu de séances cette semaine) ---- */
+function bonusBox(){
+  if(BLOCKS[S.b].test&&S.w===3)return"";
+  const k=S.b+"-"+S.w+"-"+S.d;
+  return '<div class="mv"><label class="mv-bon"><input type="checkbox" id="bonusChk"'+(BON[k]?" checked":"")+'><span>Allonger la séance : +1 série sur les mouvements principaux, et un bloc technique + renfo chaîne postérieure en plus</span></label>'+
+    '<p class="mv-hint">Utile quand tu n\'as pu faire qu\'une ou deux séances d\'haltéro dans la semaine. Mêmes charges, jamais plus lourd. Évite-la si tu as une séance d\'haltéro le lendemain. Arrête dès que la technique se dégrade, 1 h 45 maximum.</p></div>';
+}
+/* ---- prochaine séance ---- */
+/* prochaine séance d'un type : celle en cours si la dernière commencée n'est pas finie, sinon la suivante.
+   Une séance plus ancienne restée incomplète est considérée comme passée (rien à rattraper). */
+function nextOf(type){
+  const PR=progress(),L=[];
+  for(let b=0;b<4;b++)for(let w=0;w<4;w++)for(const d of Object.keys(DAYS)){
+    if(DAYS[d].type!==type)continue;
+    const st=PR.days[b+"-"+w+"-"+d].st;
+    if(st!=="none"&&st!=="skip")L.push({b,w,d,st});
+  }
+  let last=-1;L.forEach((x,i)=>{if(x.st==="done"||x.st==="part")last=i;});
+  if(last>=0&&L[last].st==="part")return L[last];
+  return L[last+1]||null;
+}
+function lastDate(type){
+  let best=null;
+  Object.keys(DT).forEach(dk=>{const d=dk.split("-")[2];if(DT[dk]&&DAYS[d]&&DAYS[d].type===type&&(!best||DT[dk]>best))best=DT[dk];});
+  return best;
+}
+function daysSince(iso){return iso?Math.round((new Date(todayISO())-new Date(iso))/864e5):null;}
+function nextBox(){
+  const el=document.getElementById("nextBox");if(!el)return;
+  const nh=nextOf("h"),nc=nextOf("c"),nm=nextOf("m");
+  const lab=n=>BLOCKS[n.b].id+" · C"+(n.w+1)+" · "+DAYS[n.d].f;
+  const dh=daysSince(lastDate("h"));
+  let hint="";
+  if(dh===0)hint="La prochaine plutôt après un jour sans haltéro.";
+  else if(dh===1){
+    const hd=new Set(Object.keys(DT).filter(k=>DT[k]&&DAYS[k.split("-")[2]].type==="h").map(k=>DT[k]));
+    hint=[...hd].some(x=>daysSince(x)===2)?"Deux jours d'haltéro d'affilée : pause ou grimpe facile aujourd'hui.":"Possible aujourd'hui, mais pas de 3e jour d'affilée ensuite.";
+  }else if(dh!==null&&dh>=10)hint="Plus de 10 jours sans haltéro : baisse les charges de 5 à 10 % pour cette séance de reprise.";
+  let h='<div class="nx"><span class="nx-t">Prochaine séance</span><div class="nx-b">';
+  if(nh)h+='<button type="button" class="nx-h" data-nx="'+nh.b+'-'+nh.w+'-'+nh.d+'"><b>'+lab(nh)+'</b><small>Haltéro · '+DAYS[nh.d].sub.toLowerCase()+(nh.st==="part"?" · en cours":"")+'</small></button>';
+  else h+='<span class="nx-done">Programme d\'haltéro terminé ✦</span>';
+  if(nc)h+='<button type="button" class="nx-c" data-nx="'+nc.b+'-'+nc.w+'-'+nc.d+'"><b>'+DAYS[nc.d].f+'</b><small>'+CLIMB[nc.d].t.split(" · ")[0]+' · C'+(nc.w+1)+'</small></button>';
+  if(nm&&(nm.b*4+nm.w)<=(nh?nh.b*4+nh.w:15))h+='<button type="button" class="nx-m" data-nx="'+nm.b+'-'+nm.w+'-'+nm.d+'"><b>Mobilité</b><small>Hanches · C'+(nm.w+1)+'</small></button>';
+  h+='</div>'+(dh!==null?'<p class="nx-hint">Dernière haltéro : '+(dh===0?"aujourd'hui":dh===1?"hier":"il y a "+dh+" jours")+'.'+(hint?" "+hint:"")+'</p>':'')+'</div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-nx]").forEach(x=>x.onclick=()=>{const [b,w,d]=x.dataset.nx.split("-");S.b=+b;S.w=+w;S.d=d;save();render();});
+}
+/* à l'ouverture : on arrive sur la prochaine séance d'haltéro, sauf si la séance affichée est en cours */
+function goNext(){
+  const PR=progress(),cur=PR.days[S.b+"-"+S.w+"-"+S.d];
+  if(cur&&cur.st==="part")return;
+  const n=nextOf("h");if(n){S.b=n.b;S.w=n.w;S.d=n.d;}
+}
+/* ---- report de séance (ancien système à jours fixes, plus affiché) ---- */
 const ORDER=["lun","mar","mer","jeu","ven","sam","dim"];
 function moveBox(){
   const k=S.b+"-"+S.w+"-"+S.d,cur=MOVED[k]||S.d,start=ORDER.indexOf(S.d);
@@ -1472,9 +1563,10 @@ function sessionBanner(){
   const PR=progress(),d=PR.days[S.b+"-"+S.w+"-"+S.d],W=PR.weeks[S.b*4+S.w],B=PR.blocks[S.b];
   let h="";
   if(B.complete)h='<div class="bn blk">✦ Bloc '+(S.b+1)+' terminé · '+BLOCKS[S.b].name+' ✦</div>';
-  else if(W.complete)h='<div class="bn wk">✓ Semaine terminée · '+W.done+' / '+W.planned+' séances</div>';
-  if(d.st==="done")h+='<div class="bn ok">✓ Séance terminée · '+Math.round(d.pct*100)+' % des séries</div>';
-  else if(d.st==="part")h+='<div class="bn part">Séance en cours · '+Math.round(d.pct*100)+' % des séries <small>(terminée à 80 %, échauffement non compté)</small></div>';
+  else if(W.complete)h='<div class="bn wk">✓ Cycle terminé · '+W.done+' / '+W.planned+' séances</div>';
+  const dd=DT[S.b+"-"+S.w+"-"+S.d],dlab=dd?" · le "+dd.split("-").reverse().slice(0,2).join("/"):"";
+  if(d.st==="done")h+='<div class="bn ok">✓ Séance terminée'+dlab+' · '+Math.round(d.pct*100)+' % des séries</div>';
+  else if(d.st==="part")h+='<div class="bn part">Séance en cours'+dlab+' · '+Math.round(d.pct*100)+' % des séries <small>(terminée à 80 %, échauffement non compté)</small></div>';
   else if(d.st==="skip")h+='<div class="bn part">Séance remplacée par une séance d\'haltéro reportée</div>';
   if(kwDue&&DAYS[S.d].type==="m")h+='<div class="bn kw">📏 Test genou-mur du mois '+(kd===null?"(premier test)":"(dernier il y a "+kd+" jours)")+' · <button class="linkbtn" id="goKw">le faire maintenant</button></div>';
   el.innerHTML=h;
@@ -1528,7 +1620,7 @@ function session(){
   }else{
     const bl=BLOCKS[S.b];
     const k=S.b+"-"+S.w+"-"+S.d;
-    BONUSON=!!(BON[k]&&MOVED[k]&&MOVED[k]!==S.d&&!(bl.test&&S.w===3));
+    BONUSON=!!(BON[k]&&!(bl.test&&S.w===3));
     addSection(list,"Haltérophilie",bl.days[S.d].ex,"h");
     addFoldSection(list,"Mobilité · entre les séries",MOBS[S.d],"mob","mobBetween",false);
     if(!(bl.test&&S.w===3&&S.d==="sam"))addSection(list,"Renforcement",RENFO[S.d],"renfo");
@@ -1552,7 +1644,7 @@ function session(){
     };
   });
 }
-function render(){nav();intro();focusCard();warmup();session();setTimeout(updateFoldAll,0);}
+function render(){nextBox();nav();intro();focusCard();warmup();session();setTimeout(updateFoldAll,0);}
 
 /* =============== RÉGLAGES =============== */
 function bindMax(){
@@ -1594,7 +1686,7 @@ document.getElementById("resetLoads").onclick=()=>{
 };
 /* =============== SUIVI =============== */
 const C_PLAN="#8a7d9e",C_DONE="#9a7ad8",C_SN="#9a7ad8",C_CJ="#33a883",SURF="#211a2b";
-const WEEKS=[];BLOCKS.forEach((b,bi)=>[0,1,2,3].forEach(w=>WEEKS.push({b:bi,w,l:b.id+" · S"+(w+1)})));
+const WEEKS=[];BLOCKS.forEach((b,bi)=>[0,1,2,3].forEach(w=>WEEKS.push({b:bi,w,l:b.id+" · C"+(w+1)})));
 
 function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function logMax(){
@@ -1812,8 +1904,8 @@ function renderSuivi(){
   const e=S.ex,unit=unitOf(e);
   const plan=WEEKS.map(W=>plannedFor(e,W.b,W.w));
   const done=WEEKS.map(W=>doneFor(e,W.b,W.w));
-  document.getElementById("chartTtl").textContent=EX[e].n+" — charge la plus lourde de la semaine ("+unit+")";
-  const labels=WEEKS.map(W=>({short:"S"+(W.w+1),long:W.l}));
+  document.getElementById("chartTtl").textContent=EX[e].n+" — charge la plus lourde du cycle ("+unit+")";
+  const labels=WEEKS.map(W=>({short:"C"+(W.w+1),long:W.l}));
   const groups=BLOCKS.map((b,i)=>({l:b.id,from:i*4,to:i*4+3}));
   lineChart(document.getElementById("chartLoad"),labels,[
     {name:"Prévu",color:C_PLAN,vals:plan,dash:true},
@@ -1825,11 +1917,11 @@ function renderSuivi(){
   if(!nDone)note="Rien d'enregistré pour l'instant : coche une série de cet exercice pour que la charge apparaisse ici.";
   else{
     const dv=done[lastI],pv=plan[lastI];
-    note=nDone+" semaine"+(nDone>1?"s":"")+" enregistrée"+(nDone>1?"s":"")+". Dernière : "+WEEKS[lastI].l+", "+fmt(dv)+" "+unit+
+    note=nDone+" cycle"+(nDone>1?"s":"")+" enregistré"+(nDone>1?"s":"")+". Dernière : "+WEEKS[lastI].l+", "+fmt(dv)+" "+unit+
       (pv!==null?" ("+(dv>=pv?"+":"")+fmt(dv-pv)+" par rapport au prévu)":"")+".";
   }
   document.getElementById("loadNote").textContent=note;
-  document.getElementById("tblLoad").innerHTML='<table class="d"><tr><th>Semaine</th><th>Prévu</th><th>Réalisé</th></tr>'+
+  document.getElementById("tblLoad").innerHTML='<table class="d"><tr><th>Cycle</th><th>Prévu</th><th>Réalisé</th></tr>'+
     WEEKS.map((W,i)=>plan[i]===null&&done[i]===null?"":'<tr><td>'+W.l+'</td><td>'+(plan[i]===null?"—":fmt(plan[i]))+'</td><td>'+(done[i]===null?"—":fmt(done[i]))+'</td></tr>').join("")+'</table>';
 
   /* maxes */
@@ -1889,12 +1981,12 @@ function renderPlanGrid(){
   let h='<table class="pg"><thead><tr><th></th>';
   for(let w=0;w<4;w++){
     const W=PR.weeks[b*4+w];
-    h+='<th class="'+(b*4+w===cur?"cur":"")+(W.complete?" ok":"")+'">S'+(w+1)+(w===3?(bl.test?" test":" déload"):"")+(W.complete?" ✓":"")+'<small>'+W.done+'/'+W.planned+'</small></th>';
+    h+='<th class="'+(b*4+w===cur?"cur":"")+(W.complete?" ok":"")+'">C'+(w+1)+(w===3?(bl.test?" test":" déload"):"")+(W.complete?" ✓":"")+'<small>'+W.done+'/'+W.planned+'</small></th>';
   }
   h+='</tr></thead><tbody>';
-  ["lun","mar","mer","jeu","ven","sam","dim"].forEach(d=>{
+  Object.keys(DAYS).forEach(d=>{
     const D=DAYS[d];
-    h+='<tr class="t-'+D.type+'"><th>'+D.s+'<small>'+(D.type==="h"?"Haltéro":D.type==="c"?"Grimpe":"Mobil.")+'</small></th>';
+    h+='<tr class="t-'+D.type+'"><th>'+D.s+'<small>'+D.sub+'</small></th>';
     for(let w=0;w<4;w++){
       const st=PR.days[b+"-"+w+"-"+d].st;
       let c="";
@@ -1922,7 +2014,7 @@ function renderTimeline(){
   const cur=curWeekIdx();
   let h='<div class="tl"><div class="tl-row tl-h"><span class="tl-l"></span>'+BLOCKS.map(b=>'<span class="tl-b" style="grid-column:span 4">'+b.id+'</span>').join("")+'</div>';
   h+='<div class="tl-row tl-w"><span class="tl-l"></span>';
-  for(let i=0;i<16;i++)h+='<span class="'+(i===cur?"here":"")+'">'+(i===cur?"▼":"S"+(i%4+1))+'</span>';
+  for(let i=0;i<16;i++)h+='<span class="'+(i===cur?"here":"")+'">'+(i===cur?"▼":"C"+(i%4+1))+'</span>';
   h+='</div>';
   lanes.forEach(([f,name])=>{
     /* un seul exercice repère par famille et par semaine : celui du jour dominant */
@@ -1975,7 +2067,7 @@ function dayItems(b,w,d){
 function weekStats(){
   const W=[];
   for(let b=0;b<4;b++)for(let w=0;w<4;w++){
-    const row={b,w,l:BLOCKS[b].id+" · S"+(w+1),days:{},tonH:0,tonR:0,sets:0};
+    const row={b,w,l:BLOCKS[b].id+" · C"+(w+1),days:{},tonH:0,tonR:0,sets:0};
     Object.keys(DAYS).forEach(d=>{
       let plan=0,done=0;
       dayItems(b,w,d).forEach(({it,cat,bonus})=>{
@@ -2032,7 +2124,7 @@ function barChart(el,rows){
     if(b>0)g+='<line class="grid" x1="'+(ml+b*4*bw)+'" x2="'+(ml+b*4*bw)+'" y1="'+mt+'" y2="'+(mt+ph)+'" stroke-dasharray="2 4"/>';
     g+='<text class="blk" x="'+(ml+(b*4+2)*bw)+'" y="'+(H-8)+'" text-anchor="middle">'+BLOCKS[b].id+'</text>';
   }
-  el.innerHTML='<svg width="'+Wd+'" height="'+H+'" viewBox="0 0 '+Wd+' '+H+'" role="img" aria-label="Tonnage par semaine, haltérophilie et renforcement">'+g+'</svg>';
+  el.innerHTML='<svg width="'+Wd+'" height="'+H+'" viewBox="0 0 '+Wd+' '+H+'" role="img" aria-label="Tonnage par cycle, haltérophilie et renforcement">'+g+'</svg>';
   const tip=document.getElementById("tipbox");
   el.querySelectorAll(".hit").forEach(h=>{
     const show=ev=>{
@@ -2053,7 +2145,7 @@ function barChart(el,rows){
 }
 function heatmap(el,rows,cur){
   const DS=Object.keys(DAYS);
-  let h='<div class="hm"><div class="hm-row hm-head"><span></span>'+DS.map(d=>'<span>'+DAYS[d].s[0]+'</span>').join("")+'</div>';
+  let h='<div class="hm"><div class="hm-row hm-head"><span></span>'+DS.map(d=>'<span>'+DAYS[d].h+'</span>').join("")+'</div>';
   rows.forEach((r,i)=>{
     h+='<div class="hm-row'+(i===cur?' cur':'')+'"><span class="hm-l">'+r.l+'</span>';
     DS.forEach(d=>{
@@ -2094,16 +2186,16 @@ function renderDash(){
   const dTon=P&&P.ton>0?Math.round((R.ton-P.ton)/P.ton*100):null;
   const a=acwrLabel(R.acwr);
   document.getElementById("kpis").innerHTML=
-    '<div class="kpi"><span class="kl">Semaine en cours</span><span class="kv">'+R.l+'</span><span class="ks">'+BLOCKS[R.b].name+'</span></div>'+
+    '<div class="kpi"><span class="kl">Cycle en cours</span><span class="kv">'+R.l+'</span><span class="ks">'+BLOCKS[R.b].name+'</span></div>'+
     '<div class="kpi"><span class="kl">Séances faites</span><span class="kv">'+sDone+' <small>/ '+sPlan+'</small></span><span class="ks">'+(sPlan?Math.round(sDone/sPlan*100)+" % de régularité":"—")+'</span></div>'+
-    '<div class="kpi"><span class="kl">Tonnage semaine</span><span class="kv">'+fmtK(R.ton)+'</span><span class="ks">'+(dTon===null?R.sets+" séries":(dTon>=0?"+":"")+dTon+" % vs semaine d'avant")+'</span></div>'+
+    '<div class="kpi"><span class="kl">Tonnage du cycle</span><span class="kv">'+fmtK(R.ton)+'</span><span class="ks">'+(dTon===null?R.sets+" séries":(dTon>=0?"+":"")+dTon+" % vs cycle d'avant")+'</span></div>'+
     '<div class="kpi acwr '+a.c+'"><span class="kl">ACWR</span><span class="kv">'+(R.acwr===null?"—":fmt(Math.round(R.acwr*100)/100))+'</span><span class="ks">'+a.t+'</span></div>'+
     '<div class="kpi wide"><span class="kl">Séries validées depuis le début</span><span class="kv">'+totSets+'</span></div>';
   barChart(document.getElementById("chartTon"),rows);
-  const labels=rows.map(r=>({short:"S"+(r.w+1),long:r.l}));
+  const labels=rows.map(r=>({short:"C"+(r.w+1),long:r.l}));
   lineChart(document.getElementById("chartAcwr"),labels,[
     {name:"ACWR",color:C_DONE,vals:rows.map(r=>r.acwr===null?null:Math.round(r.acwr*100)/100),dots:true,label:true}
-  ],{unit:"",h:200,domain:[0,2,0.5],band:{lo:0.8,hi:1.3,label:"zone optimale 0,8–1,3"},groups:BLOCKS.map((b,i)=>({l:b.id,from:i*4,to:i*4+3})),aria:"ACWR par semaine"});
+  ],{unit:"",h:200,domain:[0,2,0.5],band:{lo:0.8,hi:1.3,label:"zone optimale 0,8–1,3"},groups:BLOCKS.map((b,i)=>({l:b.id,from:i*4,to:i*4+3})),aria:"ACWR par cycle"});
   heatmap(document.getElementById("heat"),rows,ci);
 }
 
@@ -2281,7 +2373,7 @@ function initTabs(){
   show(["suivi","plan"].includes(S.tab)?S.tab:"prog");
 }
 
-load();if(!MH.length)logMax();foldStatics();bindMax();render();initTabs();bindIO();bindFoldAll();updateFoldAll();initCloud();
+load();goNext();if(!MH.length)logMax();foldStatics();bindMax();render();initTabs();bindIO();bindFoldAll();updateFoldAll();initCloud();
 </script>
 </body>
 </html>
